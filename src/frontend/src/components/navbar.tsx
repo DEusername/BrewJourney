@@ -1,5 +1,6 @@
 import { View, Text, Pressable } from "react-native";
 import { Link } from "expo-router";
+import { NativeTabs } from "expo-router/unstable-native-tabs";
 
 export default function Navbar() {
   return (
@@ -24,6 +25,7 @@ export default function Navbar() {
           <Text>Chat</Text>
         </Pressable>
       </Link>
+      
     </View>
   );
 }

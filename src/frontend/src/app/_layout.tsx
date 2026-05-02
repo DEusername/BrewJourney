@@ -1,17 +1,20 @@
-import { Stack, useSegments } from "expo-router";
-import Navbar from "../components/navbar";
-import { View } from "react-native";
+import { NativeTabs } from "expo-router/unstable-native-tabs";
 
-export default function RootLayout() {
-  const segments = useSegments();
-  const showNavbar = segments.length > 0 && segments[0] !== "index";
-
+export default function TabLayout() {
   return (
-    <View style={{ flex: 1 }}>
-      {showNavbar && <Navbar />}
-      <View style={{ flex: 1 }}>
-        <Stack screenOptions={{ headerShown: false }} />
-      </View>
-    </View>
+    <NativeTabs>
+      <NativeTabs.Trigger name="index">
+        <NativeTabs.Trigger.Label>Home</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon sf="house.fill" md="home" />
+      </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="settings">
+        <NativeTabs.Trigger.Icon sf="gear" md="settings" />
+        <NativeTabs.Trigger.Label>Settings</NativeTabs.Trigger.Label>
+      </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="profile">
+        <NativeTabs.Trigger.Icon sf="person" md="details" />
+        <NativeTabs.Trigger.Label>Profile</NativeTabs.Trigger.Label>
+      </NativeTabs.Trigger>
+    </NativeTabs>
   );
 }
