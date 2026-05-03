@@ -7,12 +7,13 @@ BrewJourney is a mobile-first logging and AI-powered recommendation application 
 BrewJourney was built during BeaverHacks 2026 at Oregon State University, specifically targeting the 'Google - Best Use of Gemini' track.
 
 ## The Problem: The "Entry Barrier" of Hobbyist Coffee
-Getting into hobbyist coffee is rewarding, but the learning curve can be steep. Improving your brew requires tracking variables like grind size, water temperature, timing, and ratios. For those just starting out, this can feel overwhelming; for seasoned hobbyists, keeping track of these details across different beans and methods becomes a repetitive, tiresome chore. This "data fatigue" often leads to inconsistent brews and missed opportunities to learn from what’s actually in the cup.
+Getting into hobbyist coffee is rewarding, but the learning curve can be steep. Improving your brew requires tracking variables like grind size, water temperature, timing, and weight ratios. For those just starting out, this can feel overwhelming; for seasoned hobbyists, keeping track of these details across different beans and methods becomes a repetitive, tiresome chore. This "data fatigue" often leads to inconsistent brews and missed opportunities to learn from what’s actually in the cup.
 
-### Key Features
-- **Precise Brew Analytics:** Go beyond simple notes. Track the granular variables that make that perfect cup, including coffee-to-water ratios, grind sizes, roast levels, temperatures, and more. Our structured logging ensures every brew is a step towards success.
-- **AI Barista ("Brewy"):** Your own digital barista. Brewy doesn't just chat; it analyzes your historical brew logs to provide evidence-backed adjustments. Whether your extraction is too sour or your body is too thin, Brewy leverages AI to diagnose your technique and suggest calibrated improvements. 
-- XX: FIXME
+## Our Solution
+BrewJourney aims to bridge the gap between logging data and gaining actual insight. We built a tool that simplifies the workflow of coffee making, allowing the user to focus on the enjoyment of the craft rather than the tedium of the paperwork.
+  - **Streamlined Workflow:** A clean, intuitive user interface, designed to capture essential data points quickly, ensuring the logging process never interrupts the ritual of brewing.
+  - **Evidence-Backed Insights:** Leveraging Google Gemini, BrewJourney moves beyond static logs. By analyzing your unique brew history, the app provides grounded, data-driven suggestions to help you dial in your next cup with precision.
+  - **Long-Term Learning:** Whether you are brewing your first pour-over or your thousandth, our goal is to maximize the learning and enjoyment of the hobby by making your data work for you.
 
 ## Tech Stack
 - Frontend: React Native, Expo, Tamagui (styling)
