@@ -1,7 +1,10 @@
 import { createContext } from "react";
-import { NativeTabs } from "expo-router/unstable-native-tabs";
 import { TamaguiProvider } from "tamagui";
 import tamaguiConfig from "../../tamagui.config";
+import { Tabs } from "expo-router";
+import * as React from "react";
+import { Ionicons } from "@expo/vector-icons";
+
 
 export interface BrewItem {
   // temp type for brew
@@ -65,30 +68,27 @@ const brewList: BrewItem[] = [
 
 export const BrewListContext = createContext<BrewItem[]>(brewList);
 
-export default function TabLayout() {
-  // Provide brew list to the app, also set up the tab navigation structure
+
+
+export default function TabLayout() {// Provide brew list to the app, also set up the tab navigation structure
   return (
     <TamaguiProvider config={tamaguiConfig} defaultTheme="light">
-      <BrewListContext.Provider value={brewList}>
-        <NativeTabs>
-          <NativeTabs.Trigger name="home">
-            <NativeTabs.Trigger.Label>Home</NativeTabs.Trigger.Label>
-            <NativeTabs.Trigger.Icon sf="house.fill" md="home" />
-          </NativeTabs.Trigger>
-          <NativeTabs.Trigger name="addABrew">
-            <NativeTabs.Trigger.Icon sf="plus.circle" md="add" />
-            <NativeTabs.Trigger.Label>Add a Brew</NativeTabs.Trigger.Label>
-          </NativeTabs.Trigger>
-          <NativeTabs.Trigger name="chat">
-            <NativeTabs.Trigger.Icon sf="person" md="details" />
-            <NativeTabs.Trigger.Label>Barrista Chat</NativeTabs.Trigger.Label>
-          </NativeTabs.Trigger>
-          <NativeTabs.Trigger name="data">
-            <NativeTabs.Trigger.Icon sf="person" md="details" />
-            <NativeTabs.Trigger.Label>My Data</NativeTabs.Trigger.Label>
-          </NativeTabs.Trigger>
-        </NativeTabs>
-      </BrewListContext.Provider>
+      
+        <BrewListContext.Provider value={brewList}>
+          <Tabs
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
+          <Tabs.Screen name="home" options={{ title: "Home", tabBarIcon: ({ color, size }) => (
+            <Ionicons name="home" size={size} color={color} /> ) }} />
+          <Tabs.Screen name="addABrew" options={{ title: "Add a Brew" }} />
+          <Tabs.Screen name="chat" options={{ title: "Barista Chat" }} />
+          <Tabs.Screen name="data" options={{ title: "My Data" }} />
+        </Tabs>
+        </BrewListContext.Provider>
+      
     </TamaguiProvider>
+    
   );
 }

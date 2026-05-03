@@ -1,18 +1,19 @@
 import { Text, View } from "react-native";
 import { StyleSheet } from "react-native";
-import { useContext } from "react";
-import { Link } from "expo-router";
+import { useContext } from 'react';
 import PageHeader from "../components/PageHeader";
 import { ScrollView } from "react-native";
 import { YStack } from "tamagui";
 import BrewCard from "../components/Card1";
-import { BrewListContext } from "./_layout";
-import { Button } from "tamagui";
+import { BrewListContext } from './_layout';
+import { Stack } from "expo-router";
+
 export default function Home() {
   const brewList = useContext(BrewListContext);
 
   return (
     <View style={styles.container}>
+      <Stack.Screen options={{ title: "Home" }} />
       <PageHeader title="Home" />
       <View style={styles.content}>
         <Text style={styles.subheader}>Recent Brews:</Text>

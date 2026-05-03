@@ -1,6 +1,6 @@
-import { Link } from "expo-router";
-import { Button, Card, H2, Image, Paragraph, XStack, YStack } from "tamagui";
-import { styled } from "tamagui";
+
+import { Link, router } from 'expo-router'
+import { Button, Card, H2, Image, Paragraph, XStack, YStack } from 'tamagui'
 
 interface BrewCardProps {
   title: string;
