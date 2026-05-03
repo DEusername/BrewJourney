@@ -13,12 +13,14 @@ import {
 } from "tamagui";
 
 import Select1 from "./Select1";
+import Select2 from "./Select2";
 
 export function FormsDemo() {
   const [status, setStatus] = React.useState<"off" | "submitting">("off");
 
   // form state
   const [method, setMethod] = React.useState("");
+  const [grinder, setGrinder] = React.useState("");
   const [dose, setDose] = React.useState("");
   const [ratio, setRatio] = React.useState("");
   const [grindSize, setGrindSize] = React.useState("");
@@ -62,71 +64,96 @@ export function FormsDemo() {
       flex={1}
       
     >
-      <H4>New Brew</H4>
+      <H4 fontSize={30}>New Brew</H4>
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <YStack gap="$3" flex={1}>
 
-          <Label htmlFor="method">Method</Label>
+          <Label style={styles.subheader} htmlFor="method">
+            Method
+          </Label>
           <Select1 value={method} onValueChange={setMethod} />
 
-          <Label htmlFor="dose">Dose</Label>
+          <Label style={styles.subheader} htmlFor="grinder">
+            Grinder
+          </Label>
+          <Select2 value={grinder} onValueChange={setGrinder} />
+
+          <Label style={styles.subheader} htmlFor="dose">
+            Dose
+          </Label>
           <Input
             id="dose"
             value={dose}
             onChangeText={setDose}
             placeholder="Enter the dose"
           />
-          <Label htmlFor="ratio">Ratio</Label>
+          <Label style={styles.subheader} htmlFor="ratio">
+            Ratio
+          </Label>
           <Input
             id="ratio"
             value={ratio}
             onChangeText={setRatio}
             placeholder="Enter the ratio"
           />
-          <Label htmlFor="grindSize">Grind Size</Label>
+          <Label style={styles.subheader} htmlFor="grindSize">
+            Grind Size
+          </Label>
           <Input
             id="grindSize"
             value={grindSize}
             onChangeText={setGrindSize}
             placeholder="Enter grind size"
           />
-          <Label htmlFor="roastLevel">Roast Level</Label>
+          <Label style={styles.subheader} htmlFor="roastLevel">
+            Roast Level
+          </Label>
           <Input
             id="roastLevel"
             value={roastLevel}
             onChangeText={setRoastLevel}
             placeholder="Enter roast level"
           />
-          <Label htmlFor="coffeeType">Coffee Type</Label>
+          <Label style={styles.subheader} htmlFor="coffeeType">
+            Coffee Type
+          </Label>
           <Input
             id="coffeeType"
             value={coffeeType}
             onChangeText={setCoffeeType}
             placeholder="Enter coffee type"
           />
-          <Label htmlFor="waterTarget">Water Target (g)</Label>
+          <Label style={styles.subheader} htmlFor="waterTarget">
+            Water Target (g)
+          </Label>
           <Input
             id="waterTarget"
             value={waterTarget}
             onChangeText={setWaterTarget}
             placeholder="Enter target water"
           />
-          <Label htmlFor="temp">Temperature</Label>
+          <Label style={styles.subheader} htmlFor="temp">
+            Temperature
+          </Label>
           <Input
             id="temp"
             value={temp}
             onChangeText={setTemp}
             placeholder="Enter temperature"
           />
-          <Label htmlFor="waterActual">Water Actual</Label>
+          <Label style={styles.subheader} htmlFor="waterActual">
+            Water Actual
+          </Label>
           <Input
             id="waterActual"
             value={waterActual}
             onChangeText={setWaterActual}
             placeholder="Enter actual water"
           />
-          <Label htmlFor="notes">Notes</Label>
+          <Label style={styles.subheader} htmlFor="notes">
+            Notes
+          </Label>
           <TextArea
             id="notes"
             value={notes}
@@ -148,5 +175,12 @@ export function FormsDemo() {
 const styles = StyleSheet.create({
   scrollContent: {
     paddingBottom: 40,
+  },
+  subheader: {
+    justifyContent: "flex-start",
+    color: "black",
+    fontSize: 20,
+    paddingTop: 1,
+    height: 35
   },
 });
