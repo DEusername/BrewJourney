@@ -14,7 +14,6 @@ export default function AddABrew() {
             <View style={styles.scroll}  >
               <FormsDemo />
             </View>
-          
         </View>
   );
 }
