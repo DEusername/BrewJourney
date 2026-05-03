@@ -17,6 +17,12 @@ export default function Select1() {
               <Select.Item value="latte" index={0}>
                     <Select.ItemText>Latte</Select.ItemText>
                 </Select.Item>
+                <Select.Item value="espresso" index={0}>
+            <Select.ItemText>Espresso</Select.ItemText>
+          </Select.Item>
+          <Select.Item value="mocha" index={0}>
+            <Select.ItemText>Mocha</Select.ItemText>
+          </Select.Item>
             
           </Select.Group>
         </Select.Viewport>
