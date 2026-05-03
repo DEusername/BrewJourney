@@ -8,8 +8,10 @@ const router = Router()
 // need certain fields, and can retrieve the rest of the data after interacting
 // with one (tapping one) in your log
 router.post("/all", async (req, res) => {
+
 	const userId = req.body.id;
 	const count = await prisma.brewLogs.count();
+
 	if (count == 0){
 		res.status(404).send("No brew logs in the database")
 	} else {
@@ -18,9 +20,23 @@ router.post("/all", async (req, res) => {
 	}
 });
 
-// Find a specific brewlog by a brewlog's id
-router.get("/find/:id", async (req, res) => {
-	const id = req.params.id;
+// Returns all brewlogs in the database, a helpful route for developing
+router.get("/all-dev", async (req, res) => {
+
+	const count = await prisma.brewLogs.count();
+
+	if (count == 0){
+		res.status(404).send("No brew logs in the database")
+	} else {
+		const logs = await prisma.brewLogs.findMany();
+		res.status(200).send(logs);
+	}
+});
+
+// Find a specific brewlog by a brewlog's id, using post so it's technically secure
+router.post("/find", async (req, res) => {
+
+	const id = req.body.id;
 
 	const log = await prisma.brewLogs.findUnique({where: {id: id}});
 	console.log("returned ", user, " after searching for matching log with id");
@@ -32,8 +48,9 @@ router.get("/find/:id", async (req, res) => {
 	}
 });
 
-// Create a brewlog using user-provided data, including userId and other foreign keys for the database's record
+// Creates multiple brewlogs using user-provided data, including userId and other foreign keys for the database's record
 router.post("/create", async (req, res) => {
+	
 	const body = req.body; // Assuming that it is formatted properly
 	/*
 	{
@@ -55,6 +72,16 @@ router.post("/create", async (req, res) => {
 
 	Optional/default/auto values for 'createdOn' and '(brewlog)id'
 	*/
+
+	try {
+		const newLog = await prisma.brewLogs.createMany({
+			data: req.body
+		});
+		res.status(201).send("Brew log successfully added!");
+	} catch (err){
+		console.log("Error creating brew log: ", err);
+		res.status(400).send("Couldn't create brew log");
+	}
 });
 
 export default router

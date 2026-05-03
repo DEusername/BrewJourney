@@ -16,13 +16,66 @@ router.get("/all", async (req, res) => {
 	}
 });
 
+// Create multiple users, a helper route for developing
+router.post("/many", async (req, res) => {
+
+	// assumes req.body is an array of json objects with the proper fields
+
+	try {
+		const result = await prisma.users.createMany({
+			data: req.body,
+			skipDuplicates: true,
+		});
+		const count = result.count;
+		res.status(200).send(`Successfully added ${count} new users`);
+	} catch (err) {
+		console.log("Error adding multiple users: ", err);
+		res.status(400).send("Error adding multiple users");
+	}
+
+});
+
+// Find a user by userId, a helper route for developing
+router.post("/find", async (req, res) => {
+
+	const id = req.body.id;
+
+	const user = await prisma.users.findUnique({where: {id: id}});
+
+	if (user != null) {
+		console.log("found user! here: ", user);
+		const resBody = {
+			user: user,
+			message: "Successfully found user"
+		}
+		res.status(200).send(resBody);
+	} else {
+		console.log("Error finding user: ", err);
+		res.status(400).send("Error finding user");
+	}
+
+});
+
+// Delete all users, a helper route for developing
+router.delete("/all", async (req,res) => {
+	const count = await prisma.users.count();
+	try {
+		await prisma.users.deleteMany({});
+		res.status(200).send(`All users deleted. Deleted ${count} users`);
+	} catch (err){
+		console.log("Trouble deleting users: ", err);
+		res.status(400).send(`Error deleting all users. Tried deleting ${count} users`);
+	}
+})
+
 // Logging with user information - Using post so request body is encrypted with user info
+// This may be the only way to retrieve user data, as it is most secure. The user should
+// only need their id number to retrieve any other data they may need.
 router.post("/login", async (req, res) => {
 	
 	const email = req.body.email;
 	const password = req.body.password;
 
-	console.log("User's email: ", email);
 	// Finds a user based on the email only, and compares the password after
 	const user = await prisma.users.findUnique({where: {email: email}});
 	console.log("returned ", user, " after searching for matching user");
@@ -71,12 +124,7 @@ router.post("/signup", async (req, res) => {
 
 	try {
 		const user = await prisma.users.create({
-			data: {
-				firstName: firstName,
-				lastName: lastName,
-				email: email,
-				password: hashedPassword
-			}
+			data: userData
 		});
 		res.status(201).send("Sign-up successful! User created.");
 	} catch (err) {

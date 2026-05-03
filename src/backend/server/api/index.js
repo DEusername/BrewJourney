@@ -5,6 +5,8 @@ import ai from './ai.js'
 import brewlogs from './brewlogs.js'
 import conversations from './conversations.js'
 import users from './users.js'
+import grinders from './grinders.js'
+import brewmethods from './brewmethods.js'
 
 // ex for import: import businessesRouter from './businesses.js'
 
@@ -16,6 +18,8 @@ router.use("/ai", ai)
 router.use("/brewlogs", brewlogs)
 router.use("/conversations", conversations)
 router.use("/users", users)
+router.use("/grinders", grinders)
+router.use("/brewmethods", brewmethods)
 
 // Testing route for backend
 router.get("/", async (req, res) => {
