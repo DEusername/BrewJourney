@@ -20,7 +20,7 @@ const PageContainer = styled(YStack, {
 
 const ContentStack = styled(YStack, {
   flex: 1,
-  justifyContent: "center",
+  justifyContent: "flex-start",
   alignItems: "center",
   padding: "$3",
   gap: "$2",
@@ -114,7 +114,7 @@ export default function ID() {
       <SubHeading>{renderStars(rating)}</SubHeading>
       <ContentStack>
         <CenterRow>
-          <StyledCardMed marginTop={"$-6"}>
+          <StyledCardMed>
             <StyledCardHeader>
               <YStack>
                 <FieldRow>
@@ -234,9 +234,6 @@ export default function ID() {
           </StyledCardSmall>
         </CenterRow>
       </ContentStack>
-      <FooterRow>
-        <BackButton />
-      </FooterRow>
     </PageContainer>
   );
 }

@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "@tamagui/card": "^2.0.0-rc.41"
+    "@tamagui/card": "^2.0.0-rc.41",
+    "@tamagui/linear-gradient": "^2.0.0-rc.41"
   }
 }
