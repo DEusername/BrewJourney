@@ -15,7 +15,7 @@ export default function Index() {
     const formData = { email:email, password:password };
     console.log("FORM DATA:", formData);
 
-    const response = await fetch(`${backend_port}/userlogin`, {
+    const response = await fetch(`${backend_port}/users/login`, {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(formData)

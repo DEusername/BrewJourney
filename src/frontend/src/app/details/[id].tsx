@@ -11,6 +11,7 @@ import {
   styled,
   H1,
   Text,
+  TamaguiProvider,
 } from "tamagui";
 
 //**Overarching styles**
@@ -112,6 +113,7 @@ export default function ID() {
   const rating = 1;
 
   return (
+    <TamaguiProvider>
     <PageContainer>
       <Stack.Screen options={{ title: "Brew Details" }} />
       <PageHeader title={`Brew Detail`} />
@@ -237,5 +239,6 @@ export default function ID() {
         </CenterRow>
       </ContentStack>
     </PageContainer>
+    </TamaguiProvider>
   );
 }
