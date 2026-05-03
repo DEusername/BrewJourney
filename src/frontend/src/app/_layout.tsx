@@ -3,6 +3,8 @@ import { TamaguiProvider } from "tamagui";
 import tamaguiConfig from "../../tamagui.config";
 import { Tabs } from "expo-router";
 import * as React from "react";
+import { Ionicons } from "@expo/vector-icons";
+
 
 export interface BrewItem {// temp type for brew
   id: string;
@@ -46,7 +48,8 @@ export default function TabLayout() {// Provide brew list to the app, also set u
             headerShown: false,
           }}
         >
-          <Tabs.Screen name="home" options={{ title: "Home" }} />
+          <Tabs.Screen name="home" options={{ title: "Home", tabBarIcon: ({ color, size }) => (
+            <Ionicons name="home" size={size} color={color} /> ) }} />
           <Tabs.Screen name="addABrew" options={{ title: "Add a Brew" }} />
           <Tabs.Screen name="chat" options={{ title: "Barista Chat" }} />
           <Tabs.Screen name="data" options={{ title: "My Data" }} />
