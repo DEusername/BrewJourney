@@ -1,6 +1,6 @@
 
 import { Link, router } from 'expo-router'
-import { Button, Card, H2, Image, Paragraph, XStack, YStack } from 'tamagui'
+import { Button, Card, H2, Image, Paragraph, styled, XStack, YStack } from 'tamagui'
 
 interface BrewCardProps {
   title: string;
@@ -38,7 +38,7 @@ export default function BrewCard({ title, description, href }: BrewCardProps) {
           <CardSubheading>{description}</CardSubheading>
         </YStack>
         <YStack justifyContent="center" p="$3">
-          <Link href={"/details/1"} asChild>
+          <Link href={href} asChild>
             <Button size="$2.5" borderWidth={2}>
               Details
             </Button>
