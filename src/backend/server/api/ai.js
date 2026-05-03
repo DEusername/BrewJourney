@@ -109,19 +109,21 @@ router.post("/coaching", async (req, res) => {
     }
 
     let geminiFormattedMessages = []
-    for (let i = 0; i < recentMessages.length; i++) {
-        const raw = recentMessages[i].context;
+    if (recentMessages !== undefined) {
+        for (let i = 0; i < recentMessages.length; i++) {
+            const raw = recentMessages[i].context;
 
-        if (!raw) continue;
+            if (!raw) continue;
 
-        try {
-            const parsed = JSON.parse(raw);
+            try {
+                const parsed = JSON.parse(raw);
 
-            if (parsed && parsed.role && parsed.parts) {
-                geminiFormattedMessages.push(parsed);
+                if (parsed && parsed.role && parsed.parts) {
+                    geminiFormattedMessages.push(parsed);
+                }
+            } catch (err) {
+                console.log("Skipping bad message JSON:", raw);
             }
-        } catch (err) {
-            console.log("Skipping bad message JSON:", raw);
         }
     }
     // console.log("recent conversation messages for user:", geminiFormattedMessages);
