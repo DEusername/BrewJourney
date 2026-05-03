@@ -1,12 +1,12 @@
 import express from 'express'
-
+import cors from 'cors'
 import api from './api/index.js'
 
 const app = express()
 const port = process.env.PORT || 8000
 
 app.use(express.json())
-
+app.use(cors())
 app.use('/', api)
 
 app.use('*splat', function (req, res, next) {
