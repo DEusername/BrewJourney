@@ -15,7 +15,7 @@ const ai = new GoogleGenAI({
 */
 async function sendQuery(schema, systemContent, userContent) {
     let response = await ai.models.generateContent({
-        model: "gemini-2.5-flash",
+        model: "gemini-3-flash-preview",
 
         systemInstruction: {
             parts: [

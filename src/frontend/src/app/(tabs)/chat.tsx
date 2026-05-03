@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { YStack, styled, Input, Button } from "tamagui";
 import PageHeader from "../../components/PageHeader";
-import { FlatList, KeyboardAvoidingView, Platform, View, Text, StyleSheet, StatusBar } from "react-native";
+import { FlatList, KeyboardAvoidingView, Platform, View, Text, StyleSheet, StatusBar, alert } from "react-native";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import backend_port from "../../environment";
 
@@ -17,8 +17,9 @@ const styless = StyleSheet.create({
   containerLeft: {
     alignSelf: "flex-start",
     width: "50%",
-    backgroundColor: '#f9c2ff',
+    backgroundColor: '#99ba90',
     padding: 20,
+    borderRadius: 15,
     marginVertical: 8,
     marginHorizontal: 16,
   },
@@ -26,8 +27,9 @@ const styless = StyleSheet.create({
   containerRight: {
     alignSelf: "flex-end",
     width: "50%",
-    backgroundColor: '#c2f9ff',
+    backgroundColor: '#bfa26c',
     padding: 20,
+    borderRadius: 15,
     marginVertical: 8,
     marginHorizontal: 16,
   },
@@ -46,6 +48,7 @@ export default function Chat() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
   const [lastInput, setLastInput] = useState([]);
+  const [status, setStatus] = useState("");
 
   const fetchConversations = async () => {
 
@@ -53,16 +56,17 @@ export default function Chat() {
     const response = await fetch(`${backend_port}/conversations/${1}`);
     const data = await response.json();
 
+    let counter = 0;
+
     console.log("Past messages: ", data);
     let newArray = [];
 
     data.forEach(function(aiMessage) { // if error, ignore
       
-
       if (aiMessage.role == "model"){
         // ai message
         const incomingMessage = {
-          id: 1,
+          id: counter,
           content: aiMessage.RECOMMENDATIONS.join('\n'),
           role: "model"
         }
@@ -71,12 +75,14 @@ export default function Chat() {
         // user message
         // ai message
         const incomingMessage = {
-          id: 1,
+          id: counter,
           content: aiMessage.CURRENT_USER_MESSAGE,
           role: "user"
         }
         newArray.push(incomingMessage);
       }
+
+      counter += 1;
 
       console.log(newArray);
 
@@ -88,8 +94,10 @@ export default function Chat() {
   };
 
   const sendMessage = async () => {
+    
+    setStatus("Sending");
 
-    console.log("Sending a message")
+    console.log("Sending a message", input)
     const response = await fetch(`${backend_port}/ai/coaching`, {
       method: "POST",
       headers: {"Content-Type": "application/json"},
@@ -99,6 +107,11 @@ export default function Chat() {
     const data = await response.json();
 
     console.log(data);
+    setStatus("");
+    const userMessage = input;
+    setMessages(prevMes => [
+      ...prevMes, userMessage
+    ]);
 
   }
 
@@ -124,7 +137,7 @@ export default function Chat() {
         />
         <Content>
           <InputField value={input} onChangeText={setInput} />
-          <SendBtn onPress={() => sendMessage()}>Send</SendBtn>
+          <SendBtn onPress={() => sendMessage()}>{status === "Sending" ? "Sending..." : "Send"}</SendBtn>
         </Content>
       </KeyboardAvoidingView>
     </Container>
