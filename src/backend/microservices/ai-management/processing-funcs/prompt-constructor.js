@@ -3,7 +3,7 @@ async function promptConstructor(request) {
 
     // assemble past message context
     let contentsArr = []
-    if (request.context.pastConversations.recentMessages != undefined) {
+    if (request.context.pastConversations != undefined && request.context.pastConversations.recentMessages != undefined) {
         contentsArr = request.context.pastConversations.recentMessages
     }
 
@@ -24,7 +24,7 @@ async function promptConstructor(request) {
                         ...
 
                         [CONVERSATION_SUMMARY]
-                        ${request.context.pastConversations.conversationSummary ? JSON.stringify(request.context.pastConversations.conversationSummary) : ''}
+                        ${request.context.pastConversations && request.context.pastConversations.conversationSummary ? JSON.stringify(request.context.pastConversations.conversationSummary) : ''}
                         ...
 
                         [CURRENT_USER_MESSAGE]

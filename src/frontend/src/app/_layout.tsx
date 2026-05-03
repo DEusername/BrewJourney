@@ -1,5 +1,5 @@
-import { createContext } from "react";
-import { PortalProvider, TamaguiProvider } from "tamagui";
+import { createContext, useEffect } from "react";
+import { TamaguiProvider } from "tamagui";
 import tamaguiConfig from "../../tamagui.config";
 import { Tabs } from "expo-router";
 import * as React from "react";
@@ -13,6 +13,10 @@ export interface BrewItem {
   description: string;
   roast?: string;
 }
+
+const userId = 67;
+
+let brewList2;
 
 const brewList: BrewItem[] = [
   // Sample brew items
@@ -71,6 +75,39 @@ export const BrewListContext = createContext<BrewItem[]>(brewList);
 
 
 export default function TabLayout() {// Provide brew list to the app, also set up the tab navigation structure
+
+  async function getLogs() {
+    const brewList = await fetch("/brewlogs/all", {
+      method: 'POST',
+      headers: {
+        'content.type': 'application/json'
+      },
+      body: JSON.stringify({id: userId})
+    })
+
+    return brewList;
+  }
+
+  useEffect( () => {
+    // This runs once when the component mounts
+    console.log("Screen loaded!");
+
+    const getLogs = async () => {
+      const response = await fetch("/brewlogs/all", {
+        method: 'POST',
+        body: JSON.stringify({id: userId}),
+        headers: {'Content-type': 'application/json'},
+      });
+      const data = await response.json()
+      console.log("Data: ", data);
+    }
+
+    getLogs();
+
+    // Optional: Cleanup function when component unmounts
+    return () => console.log("Screen unmounted");
+  }, []); 
+
   return (
     <TamaguiProvider config={tamaguiConfig} defaultTheme="light">
         <BrewListContext.Provider value={brewList}>
