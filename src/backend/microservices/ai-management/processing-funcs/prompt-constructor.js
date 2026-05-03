@@ -7,30 +7,19 @@ async function promptConstructor(request) {
         contentsArr = request.context.pastConversations.recentMessages
     }
 
+    let userTextObj = {}
+    userTextObj.USER_PROFILE = request.context.user ?? null
+    userTextObj.BREW_HISTORY = request.context.latestBrewLogs ?? null
+    userTextObj.CONVERSATION_SUMMARY = request.context?.pastConversations?.conversationSummary ?? null;
+    userTextObj.CURRENT_USER_MESSAGE = request.message ?? null
+
     // assemble current message context
     contentsArr.push({
         role: "user",
         parts:
             [
                 {
-                    text:
-                        `
-                        [USER_PROFILE]
-                        ${request.context.user ? JSON.stringify(request.context.user) : ''}
-                        ...
-
-                        [BREW_HISTORY]
-                        ${request.context.latestBrewLogs ? JSON.stringify(request.context.latestBrewLogs) : ''}
-                        ...
-
-                        [CONVERSATION_SUMMARY]
-                        ${request.context.pastConversations && request.context.pastConversations.conversationSummary ? JSON.stringify(request.context.pastConversations.conversationSummary) : ''}
-                        ...
-
-                        [CURRENT_USER_MESSAGE]
-                        ${request.message}
-                        ...
-                        `
+                    text: JSON.stringify(userTextObj)
                 }
             ]
     })
