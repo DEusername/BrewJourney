@@ -6,6 +6,7 @@ import {
   Text,
   StyleSheet,
 } from "react-native";
+import backend_port from "../environment";
 
 type Props = {
   value: string;
@@ -18,8 +19,33 @@ const options = [
   { label: "grinder3", value: "moceryha" },
 ];
 
+const userId = 67;
+
 export default function Select1({ value, onValueChange }: Props) {
   const [open, setOpen] = React.useState(false);
+  const [options, setOptions] = React.useState([{label: "", value: ""}])
+
+  const fetchOptions = async () => {
+    const response = await fetch(`${backend_port}/grinders/findgrinder`,{
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({id: userId})
+    });
+    const data = await response.json();
+
+    const myArray = [{
+      label: data.grinderName,
+      value: data.id
+    }]
+
+    setOptions(myArray);
+  }
+
+  React.useEffect(() => {
+
+    fetchOptions();
+
+  }, [])
 
   const selectedLabel =
     options.find((o) => o.value === value)?.label ?? "Choose a grinder...";

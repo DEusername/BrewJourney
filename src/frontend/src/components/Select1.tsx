@@ -6,6 +6,7 @@ import {
   Text,
   StyleSheet,
 } from "react-native";
+import backend_port from "../environment";
 
 type Props = {
   value: string;
@@ -20,6 +21,25 @@ const options = [
 
 export default function Select1({ value, onValueChange }: Props) {
   const [open, setOpen] = React.useState(false);
+  const [options, setOptions] = React.useState([{label: "", value: ""}])
+  
+  const fetchOptions = async () => {
+    const response = await fetch(`${backend_port}/brewmethods/all`);
+    const data = await response.json();
+
+    const myArray = data.map(item => ({ // if error, ignore
+        label: item.methodName,
+        value: item.id
+    }));
+
+    setOptions(myArray);
+  }
+
+  React.useEffect(() => {
+
+    fetchOptions();
+
+  }, [])
 
   const selectedLabel =
     options.find((o) => o.value === value)?.label ?? "Choose a drink...";
