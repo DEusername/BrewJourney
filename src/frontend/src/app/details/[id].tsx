@@ -1,6 +1,7 @@
 import PageHeader from "../../components/PageHeader";
 import { Stack, useLocalSearchParams } from "expo-router";
 import { BackButton } from "../../components/BackButton";
+import {useEffect} from 'react'
 import {
   Card,
   XStack,
@@ -101,7 +102,14 @@ const renderStars = (rating: number) => {
 };
 
 export default function ID() {
-  const { id } = useLocalSearchParams();
+  const params = useLocalSearchParams();
+  const brew = params;
+
+  useEffect(() => {
+
+    console.log(brew);
+
+  }, [])
 
   //TODO, rep with actual rating from server
   const rating = 1;

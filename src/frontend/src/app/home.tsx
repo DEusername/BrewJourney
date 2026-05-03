@@ -71,6 +71,7 @@ export default function Home() {
                   title={brew.coffeeName}
                   description={brew.notes}
                   href={`/details/${brew.id}`}
+                  brew={brew}
                 />
               </View>
             ))}
