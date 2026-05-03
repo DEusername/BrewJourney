@@ -6,6 +6,26 @@ interface BrewCardProps {
   title: string;
   description: string;
   href: string;
+  brew: Logs;
+}
+
+interface Logs { 
+  id: number,
+  userId: number,
+  grinderId: number,
+  brewMethodId: number,
+  coffeeName: string,
+  roastLevel: number, // 1-5: Light, Medium-Light, Medium, Medium-Dark, Dark
+  targetRatio: string, // coffee:water ratio (in grams)
+  doseGrams: number, // Grams are usually measured in whole numbers, right? Rarely have half a gram
+  targetWaterGrams: number, // Recommended water grams for the method/grounds, auto-calculated and stored in the brew log
+  actualWaterGrams: number, // User inputted, weighed after the coffee is made
+  grindSize: number, // Number used on grinder?
+  brewTimeSeconds: number,
+  waterTemp: number
+  resultRating: number, // 1-5 rating: Bad, Okay, Good, Excellent, Perfect
+  notes: string, // User enters notes about the taste, will be used by AI
+  createdOn: string
 }
 
 //use tamagui api to write css styling which is compiled into a react native stylesheet at runtime.
@@ -29,7 +49,7 @@ const CardSubheading = styled(Paragraph, {
   color: "#411515be",
 });
 
-export default function BrewCard({ title, description, href }: BrewCardProps) {
+export default function BrewCard({title, description, href, brew}: BrewCardProps) {
   return (
     <StyledCard>
       <XStack flex={1}>
@@ -38,7 +58,10 @@ export default function BrewCard({ title, description, href }: BrewCardProps) {
           <CardSubheading>{description}</CardSubheading>
         </YStack>
         <YStack justifyContent="center" p="$3">
-          <Link href={href} asChild>
+          <Link href={
+            {pathname: href, 
+            params: {brewLog : JSON.stringify(brew)}
+            }} asChild>
             <Button size="$2.5" borderWidth={2}>
               Details
             </Button>

@@ -10,12 +10,12 @@ const router = Router()
 router.post("/all", async (req, res) => {
 
 	const userId = req.body.id;
-	const count = await prisma.brewLogs.count();
+	const count = await prisma.brewLogs.count({where: {userId: userId}});
 
 	if (count == 0){
 		res.status(404).send("No brew logs in the database")
 	} else {
-		const logs = await prisma.brewLogs.findMany({where: {id: userId}, orderBy: {createdOn: "desc"}});
+		const logs = await prisma.brewLogs.findMany({where: {userId: userId}, orderBy: {createdOn: "desc"}});
 		res.status(200).send(logs);
 	}
 });
