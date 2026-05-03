@@ -1,6 +1,6 @@
 import { createContext, useEffect } from "react";
 import { TamaguiProvider } from "tamagui";
-import tamaguiConfig from "../../tamagui.config";
+import tamaguiConfig from "../../../tamagui.config";
 import { Tabs } from "expo-router";
 import * as React from "react";
 import { Ionicons } from "@expo/vector-icons";

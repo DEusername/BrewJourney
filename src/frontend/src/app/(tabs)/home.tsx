@@ -1,13 +1,13 @@
 import { Text, View } from "react-native";
 import { StyleSheet } from "react-native";
 import { useContext, useState, useEffect } from 'react';
-import PageHeader from "../components/PageHeader";
+import PageHeader from "../../components/PageHeader";
 import { ScrollView } from "react-native";
 import { Portal, PortalProvider, YStack } from "tamagui";
-import BrewCard from "../components/Card1";
+import BrewCard from "../../components/Card1";
 import { BrewListContext } from './_layout';
 import { Stack } from "expo-router";
-import backend_port from "../environment";
+import backend_port from "../../environment";
 
 const userId = 67;
 

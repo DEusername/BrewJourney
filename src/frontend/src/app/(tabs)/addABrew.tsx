@@ -1,7 +1,7 @@
 import { Text, View } from "react-native";
 import { StyleSheet } from "react-native";
-import PageHeader from "../components/PageHeader";
-import { FormsDemo } from "../components/Form1";
+import PageHeader from "../../components/PageHeader";
+import { FormsDemo } from "../../components/Form1";
 import { Input } from "tamagui";
 import { Stack } from "expo-router/build/layouts/Stack";
 

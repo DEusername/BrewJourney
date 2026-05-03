@@ -2,7 +2,7 @@ import { Text, TextInput, View } from "react-native";
 import { StyleSheet } from "react-native";
 import { Input } from "@tamagui/input";
 import { Button } from "tamagui";
-import PageHeader from "../components/PageHeader";
+import PageHeader from "../../components/PageHeader";
 import { useState } from "react";
 import React from "react";
 

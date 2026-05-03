@@ -1,10 +1,14 @@
-import { Text, View, StyleSheet, Pressable } from "react-native";
-import  TabLayout  from "./_layout";
-import { Redirect, Stack } from "expo-router";
+import { Redirect, router, Stack } from "expo-router";
+import { useEffect } from "react";
 
-export default function Tab() {
+export default function Index() {
+  useEffect(() => {
+    router.replace("/home");
+  }, []);
+
+  
   return (
-    <Redirect href="/home" />
+    null
   );
 }
 
