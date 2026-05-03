@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { TamaguiProvider } from "tamagui";
+import { PortalProvider, TamaguiProvider } from "tamagui";
 import tamaguiConfig from "../../tamagui.config";
 import { Tabs } from "expo-router";
 import * as React from "react";
@@ -73,7 +73,6 @@ export const BrewListContext = createContext<BrewItem[]>(brewList);
 export default function TabLayout() {// Provide brew list to the app, also set up the tab navigation structure
   return (
     <TamaguiProvider config={tamaguiConfig} defaultTheme="light">
-      
         <BrewListContext.Provider value={brewList}>
           <Tabs
           screenOptions={{
@@ -87,7 +86,6 @@ export default function TabLayout() {// Provide brew list to the app, also set u
           <Tabs.Screen name="data" options={{ title: "My Data" }} />
         </Tabs>
         </BrewListContext.Provider>
-      
     </TamaguiProvider>
     
   );
