@@ -3,11 +3,13 @@ import { router } from "expo-router";
 import { View, Text, TextInput, Button, StyleSheet } from "react-native";
 
 export default function Index() {
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleLogin = () => {
+  const handleSignup = () => {
     setLoading(true);
 
     setTimeout(() => {
@@ -18,14 +20,17 @@ export default function Index() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
+      <Text style={styles.title}>Sign Up</Text>
+      <TextInput placeholder="First Name" value={firstName} onChangeText={setFirstName} style={styles.input}
+      />
+      <TextInput placeholder="Last Name" value={lastName} onChangeText={setLastName} style={styles.input}
+      />
       <TextInput placeholder="Email" value={email} onChangeText={setEmail} style={styles.input}
       />
       <TextInput placeholder="Password" value={password} onChangeText={setPassword} style={styles.input} secureTextEntry
       />
-      <Button title={loading ? "Loading..." : "Login"} onPress={handleLogin} disabled={loading}
+      <Button title={loading ? "Loading..." : "Sign Up"} onPress={handleSignup} disabled={loading}
       />
-      <Button title="Don't have an account? Sign Up" onPress={() => router.push("/signup")} />
     </View>
   );
 }

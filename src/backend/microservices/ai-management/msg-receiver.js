@@ -1,11 +1,11 @@
-import express from "express";
+import zmq from "zeromq";
 import { validateAgainstSchema, extractValidFields } from './lib/validate/validate.js'
 import { aiManager } from "./processing-funcs/ai-manager.js";
 
-const app = express()
-const port = process.env.PORT || 4001
+const sock = new zmq.Reply();
 
-app.use(express.json());
+// bind once (this is your "listening port")
+await sock.bind("tcp://127.0.0.1:4001");
 
 const aiRequestSchema = {
     mode: { required: true },
@@ -17,27 +17,21 @@ const aiRequestSchema = {
     }
 };
 
-app.post("/", async (req, res) => {
-    console.log("Received ai request with body:", req.body);
+console.log("AI Manager listening on ZeroMQ...");
 
-    const isValid = validateAgainstSchema(req.body, aiRequestSchema);
-    if (!isValid) {
-        return res.status(400).send("Invalid request body");
+for await (const [msg] of sock) {
+    try {
+        const requestObj = JSON.parse(msg.toString());
+        validateAgainstSchema(requestObj, aiRequestSchema);
+        const validObj = extractValidFields(requestObj, aiRequestSchema);
+
+        console.log("Received:", validObj);
+        // const result = { success: true, data: "This is a placeholder response from the AI Manager." };
+        const result = await aiManager(validObj);
+
+        await sock.send(JSON.stringify(result));
+        console.log("MADE IT PAST RESPONSE");
+    } catch (err) {
+        await sock.send(JSON.stringify({ error: err.message }));
     }
-
-    const validFieldsObj = extractValidFields(req.body, aiRequestSchema);
-
-    const result = await aiManager(validFieldsObj);
-
-    res.send(result).status(200)
-});
-
-app.use('*splat', function (req, res, next) {
-    res.status(404).send({
-        error: `Requested resource ${req.originalUrl} does not exist`
-    })
-})
-
-app.listen(port, () => {
-    console.log("AI Manager running on port 4001");
-});
+}

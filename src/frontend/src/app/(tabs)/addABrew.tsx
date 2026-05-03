@@ -13,9 +13,6 @@ export default function AddABrew() {
           <PageHeader title="Add a Brew" />
             <View style={styles.scroll}  >
               <FormsDemo />
-
-
-              <Text>Add a Brew Page</Text>
             </View>
           
         </View>
