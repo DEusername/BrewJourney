@@ -110,7 +110,6 @@ export default function TabLayout() {// Provide brew list to the app, also set u
 
   return (
     <TamaguiProvider config={tamaguiConfig} defaultTheme="light">
-      
         <BrewListContext.Provider value={brewList}>
           <Tabs
           screenOptions={{
@@ -124,7 +123,6 @@ export default function TabLayout() {// Provide brew list to the app, also set u
           <Tabs.Screen name="data" options={{ title: "My Data" }} />
         </Tabs>
         </BrewListContext.Provider>
-      
     </TamaguiProvider>
     
   );

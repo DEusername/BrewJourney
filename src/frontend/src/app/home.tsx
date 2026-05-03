@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 import { useContext, useState, useEffect } from 'react';
 import PageHeader from "../components/PageHeader";
 import { ScrollView } from "react-native";
-import { YStack } from "tamagui";
+import { Portal, PortalProvider, YStack } from "tamagui";
 import BrewCard from "../components/Card1";
 import { BrewListContext } from './_layout';
 import { Stack } from "expo-router";
@@ -89,6 +89,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     paddingHorizontal: 16,
+    paddingBottom: 40
   },
   scroll: {
     flex: 1,
