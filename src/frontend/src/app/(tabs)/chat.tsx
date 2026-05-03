@@ -68,5 +68,6 @@ export const SendBtn = styled(Button, {
 
 const styles = StyleSheet.create({
   output: {
-    flex: 1,
-  },);
+    flex: 1
+  },
+});
