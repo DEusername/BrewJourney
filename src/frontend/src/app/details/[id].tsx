@@ -8,8 +8,10 @@ export default function ID() {
 
   return (
     <View style={styles.container}>
-      <Stack />
+      <Stack.Screen options={{ title: "Brew Details" }} />
+
       <BackButton />
+
       <PageHeader title={`Brew Details ${id}`} />
     </View>
   );

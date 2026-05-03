@@ -13,7 +13,7 @@ export default function Home() {
 
   return (
     <View style={styles.container}>
-      <Stack />
+      <Stack.Screen options={{ title: "Home" }} />
       <PageHeader title="Home" />
       <View style={styles.content}>
         <ScrollView style={styles.scroll} contentContainerStyle={styles.scrollContent}>

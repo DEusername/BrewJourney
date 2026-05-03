@@ -3,6 +3,6 @@ import { Button } from "react-native";
 
 export function BackButton() {
   return (
-    <Button title="Back" onPress={() => navigation.navigate("/index")} />
+    <Button title="Back" onPress={() => router.back()} />
   );
 }

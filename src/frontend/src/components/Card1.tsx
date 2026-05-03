@@ -1,5 +1,5 @@
 
-import { Link } from 'expo-router'
+import { Link, router } from 'expo-router'
 import { Button, Card, H2, Image, Paragraph, XStack, YStack } from 'tamagui'
 
 interface BrewCardProps {
@@ -15,18 +15,17 @@ export default function BrewCard({ title, description, href }: BrewCardProps) {
         <YStack flex={1} p="$4" gap="$3">
           <XStack justifyContent="space-between" alignItems="center">
             <H2>{title}</H2>
-            
-                <Button onPress={() => navigation.navigate(href)} size="$4" borderWidth={2}>
+
+            <Link href={href} asChild>
+              <Button onPress={() => {router.push(href)}} size="$4" borderWidth={2}>
                 See Details
-                </Button>
-           
+              </Button>
+            </Link>
           </XStack>
+
           <Paragraph>{description}</Paragraph>
         </YStack>
-        <Card.Background>
-          <Image />
-        </Card.Background>
       </XStack>
     </Card>
-  )
+  );
 }
