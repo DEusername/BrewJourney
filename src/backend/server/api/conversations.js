@@ -3,6 +3,26 @@ import prisma from '../lib/prisma.js';
 
 const router = Router()
 
+router.get("/users/:id", async (req, res) => {
+    const userID = parseInt(req.params.id);
+
+    const allUserConvos = await prisma.conversations.findMany({
+        where: {
+            userId: userID
+        },
+        orderBy: {
+            createdAt: "desc"
+        },
+        select: {
+            id: true,
+            title: true
+        }
+    });
+
+    return res.status(200).json(allUserConvos);
+
+});
+
 router.get("/:id", async (req, res) => {
     const convoID = parseInt(req.params.id);
 
@@ -37,7 +57,20 @@ router.get("/:id", async (req, res) => {
         }
 
         if (parsed?.role && parsed?.parts) {
-            geminiFormattedMessages.push(parsed);
+            if (parsed.role === "model") {
+                console.log(parsed)
+                try {
+                    let parsedTextObj = {}
+                    parsedTextObj = JSON.parse(parsed.parts[0].text);
+                    parsedTextObj.role = "model"
+                    geminiFormattedMessages.push(parsedTextObj)
+                } catch (err) {
+                    console.log("Failed to parse model message:", err);
+                    geminiFormattedMessages.push(parsed);
+                }
+            }
+            else
+                geminiFormattedMessages.push(parsed);
         }
     }
 
