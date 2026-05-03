@@ -107,7 +107,7 @@ export default function TabLayout() {
   }, []);
 
   return (
-    <TamaguiProvider config={tamaguiConfig} defaultTheme="dark">
+    <TamaguiProvider config={tamaguiConfig} defaultTheme="light">
       <BrewListContext.Provider value={brewList}>
         <Tabs
           screenOptions={{

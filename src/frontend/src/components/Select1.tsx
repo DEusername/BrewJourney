@@ -32,6 +32,8 @@ export default function Select1({ value, onValueChange }: Props) {
         value: item.id
     }));
 
+    console.log(myArray);
+
     setOptions(myArray);
   }
 
@@ -58,6 +60,7 @@ export default function Select1({ value, onValueChange }: Props) {
                 key={opt.value}
                 style={styles.option}
                 onPress={() => {
+                  console.log(opt.value)
                   onValueChange(opt.value);
                   setOpen(false);
                 }}

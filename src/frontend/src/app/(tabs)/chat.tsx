@@ -7,15 +7,29 @@ import backend_port from "../../environment";
 
 const userId = 67;
 
-const Item = ({content}) => (
-  <View style={styless.item}>
+const Item = ({content, role}) => (
+  <View style={role === "user" ? styless.containerRight : styless.containerLeft}>
     <Text style={styless.content}>{content}</Text>
   </View>
 );
 
 const styless = StyleSheet.create({
-  container: {
-    flex: 1,
+  containerLeft: {
+    alignSelf: "flex-start",
+    width: "50%",
+    backgroundColor: '#f9c2ff',
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+
+  containerRight: {
+    alignSelf: "flex-end",
+    width: "50%",
+    backgroundColor: '#c2f9ff',
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
   },
   item: {
     backgroundColor: '#f9c2ff',
@@ -23,8 +37,8 @@ const styless = StyleSheet.create({
     marginVertical: 8,
     marginHorizontal: 16,
   },
-  title: {
-    fontSize: 32,
+  content: {
+    fontSize: 16,
   },
 });
 
@@ -49,7 +63,8 @@ export default function Chat() {
         // ai message
         const incomingMessage = {
           id: 1,
-          content: [aiMessage.RECOMMENDATIONS]
+          content: aiMessage.RECOMMENDATIONS.join('\n'),
+          role: "model"
         }
         newArray.push(incomingMessage);
       } else if (aiMessage.role == "user"){
@@ -57,7 +72,8 @@ export default function Chat() {
         // ai message
         const incomingMessage = {
           id: 1,
-          content: aiMessage.CURRENT_USER_MESSAGE
+          content: aiMessage.CURRENT_USER_MESSAGE,
+          role: "user"
         }
         newArray.push(incomingMessage);
       }
@@ -101,9 +117,9 @@ export default function Chat() {
         keyboardVerticalOffset={0}
       >
         <YStack/>
-        <FlatList style={styless.container}
+        <FlatList style={{flex: 1}}
           data={messages}
-          renderItem={({item}) => <Item content={item.content} />}
+          renderItem={({item}) => <Item content={item.content} role={item.role}/>}
           keyExtractor={item => item.id}
         />
         <Content>

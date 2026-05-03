@@ -109,16 +109,13 @@ export default function ID() {
     console.log(brew);
   }, []);
 
-  //TODO, rep with actual rating from server
-  const rating = 1;
-
   return (
-    <TamaguiProvider>
+  <TamaguiProvider>
     <PageContainer>
       <Stack.Screen options={{ title: "Brew Details" }} />
       <PageHeader title={`Brew Detail`} />
       <TopHeading>French Press - 05/01/26</TopHeading>
-      <SubHeading>{renderStars(rating)}</SubHeading>
+      <SubHeading>{renderStars(brew.resultRating)}</SubHeading>
       <ContentStack>
         <CenterRow>
           <StyledCardMed>
@@ -239,6 +236,6 @@ export default function ID() {
         </CenterRow>
       </ContentStack>
     </PageContainer>
-    </TamaguiProvider>
+  </TamaguiProvider>
   );
 }

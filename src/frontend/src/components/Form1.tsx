@@ -34,26 +34,24 @@ export function FormsDemo() {
   const [brewTimeSeconds, setBrewTimeSeconds] = React.useState("");
 
   const userId = 67;
-  const grinderId = 12;
-  const brewMethodId = 5;
 
   const handleSubmit = async () => {
     setStatus("submitting");
 
     const formData = {
       userId: userId,
-      grinderId: grinderId,
-      brewMethodId: brewMethodId,
-      doseGrams: dose,
+      grinderId: grinder,
+      brewMethodId: method,
+      doseGrams: parseInt(dose),
       targetRatio: ratio,
-      grindSize: grindSize,
-      roastLevel: roastLevel,
+      grindSize: parseInt(grindSize),
+      roastLevel: parseInt(roastLevel),
       coffeeName: coffeeType,
-      targetWaterGrams: waterTarget,
-      waterTemp: temp,
-      actualWaterGrams: waterActual,
-      brewTimeSeconds: brewTimeSeconds,
-      resultRating: resultRating,
+      targetWaterGrams: parseInt(waterTarget),
+      waterTemp: parseInt(temp),
+      actualWaterGrams: parseInt(waterActual),
+      brewTimeSeconds: parseInt(brewTimeSeconds),
+      resultRating: parseInt(resultRating),
       notes: notes,
     };
 

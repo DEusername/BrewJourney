@@ -39,7 +39,7 @@ router.get("/:id", async (req, res) => {
             conversationId: convoID
         },
         orderBy: {
-            createdAt: "desc"
+            createdAt: "asc"
         },
         select: {
             context: true
