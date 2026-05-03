@@ -17,25 +17,25 @@ export default function PageHeader({ title, subtitle }: PageHeaderProps) {
 
 const styles = StyleSheet.create({
   header: {
-    width: '100%',
-    paddingVertical: 30,
+    width: "100%",
+    paddingTop: 37,
+    paddingBottom: 7,
     paddingHorizontal: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'white',
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "white",
     borderBottomWidth: 1,
-    borderBottomColor: '#e1e5e9',
+    borderBottomColor: "#000000",
   },
   title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: '#2c3e50',
-    textAlign: 'center',
+    fontSize: 27,
+    color: "#0",
+    textAlign: "center",
   },
   subtitle: {
     fontSize: 16,
-    color: '#7f8c8d',
-    textAlign: 'center',
+    color: "#7f8c8d",
+    textAlign: "center",
     marginTop: 4,
   },
 });

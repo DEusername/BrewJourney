@@ -6,31 +6,63 @@ import * as React from "react";
 import { Ionicons } from "@expo/vector-icons";
 
 
-export interface BrewItem {// temp type for brew
+export interface BrewItem {
+  // temp type for brew
   id: string;
   title: string;
   description: string;
   roast?: string;
 }
 
-const brewList: BrewItem[] = [// Sample brew items
+const brewList: BrewItem[] = [
+  // Sample brew items
   {
-    id: '1',
-    title: 'Morning Espresso',
-    description: 'Dark roast with notes of chocolate and caramel.',
-    roast: 'Dark',
+    id: "1",
+    title: "Morning Espresso",
+    description: "★ ★ ★ ☆ ☆ - 5/1/26",
+    roast: "Dark",
   },
   {
-    id: '2',
-    title: 'Citrus Pour Over',
-    description: 'Bright Kenya bean with citrus and floral aroma.',
-    roast: 'Light',
+    id: "2",
+    title: "Citrus Pour Over",
+    description: "★ ★ ★ ★ ☆ - 4/20/26",
+    roast: "Light",
   },
   {
-    id: '3',
-    title: 'Iced Brew',
-    description: 'Smooth cold brew with creamy vanilla finish.',
-    roast: 'Medium',
+    id: "7",
+    title: "Citrus Pour Over",
+    description: "★ ★ ★ ★ ☆ - 4/20/26",
+    roast: "Light",
+  },
+  {
+    id: "12",
+    title: "Citrus Pour Over",
+    description: "★ ★ ★ ★ ☆ - 4/20/26",
+    roast: "Light",
+  },
+  {
+    id: "3",
+    title: "Iced Brew",
+    description: "Smooth cold brew with creamy vanilla finish.",
+    roast: "Medium",
+  },
+  {
+    id: "4",
+    title: "Iced Brew",
+    description: "Smooth cold brew with creamy vanilla finish.",
+    roast: "Medium",
+  },
+  {
+    id: "5",
+    title: "Iced Brew",
+    description: "Smooth cold brew with creamy vanilla finish.",
+    roast: "Medium",
+  },
+  {
+    id: "6",
+    title: "Iced Brew",
+    description: "Smooth cold brew with creamy vanilla finish.",
+    roast: "Medium",
   },
 ];
 
