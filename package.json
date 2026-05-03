@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@tamagui/card": "^2.0.0-rc.41"
+  }
+}

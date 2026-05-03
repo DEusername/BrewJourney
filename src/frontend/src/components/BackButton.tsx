@@ -1,8 +1,13 @@
 import { router } from "expo-router";
-import { Button } from "react-native";
+import { Button, styled } from "tamagui";
 
+const BackBtnStyle = styled(Button, {
+  backgroundColor: "#411515be",
+  borderRadius: "$2",
+  justifyContent: "flex-start",
+});
+
+//tamagui btn
 export function BackButton() {
-  return (
-    <Button title="Back" onPress={() => router.back()} />
-  );
+  return <BackBtnStyle onPress={() => router.back()}>Back</BackBtnStyle>;
 }
