@@ -31,7 +31,8 @@ export function FormsDemo() {
   return (
     <Form
       alignContent="center"
-      gap="$2"
+      gap="$4"
+      width="80%"
       onSubmit={() => setStatus('submitting')}
       borderWidth={1}
       bg="$color2"
