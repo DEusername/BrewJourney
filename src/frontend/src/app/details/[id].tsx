@@ -103,7 +103,7 @@ const renderStars = (rating: number) => {
 
 export default function ID() {
   const params = useLocalSearchParams();
-  const brew = params;
+  const brew = JSON.parse(params.brewLog); // If error, ignore
 
   useEffect(() => {
 
@@ -131,7 +131,7 @@ export default function ID() {
                       Dose:
                     </Text>
                     <Text color="black" fontWeight="normal" fontSize="$5">
-                      18g
+                      {brew.doseGrams}g
                     </Text>
                   </YStack>
                   <YStack flex={1} justifyContent="center" alignItems="center">
@@ -139,7 +139,7 @@ export default function ID() {
                       Ratio:
                     </Text>
                     <Text color="black" fontWeight="normal" fontSize="$5">
-                      1:15
+                      {brew.targetRatio}
                     </Text>
                   </YStack>
                   <YStack flex={1} justifyContent="center" alignItems="center">
@@ -147,7 +147,7 @@ export default function ID() {
                       Grind Size:
                     </Text>
                     <Text color="black" fontWeight="normal" fontSize="$5">
-                      Medium
+                      {brew.grindSize}
                     </Text>
                   </YStack>
                 </FieldRow>
@@ -157,7 +157,7 @@ export default function ID() {
                       Roast-Level:
                     </Text>
                     <Text color="black" fontWeight="normal" fontSize="$5">
-                      Dark
+                      {brew.roastLevel}
                     </Text>
                   </YStack>
                   <YStack
@@ -170,7 +170,7 @@ export default function ID() {
                       Coffee:
                     </Text>
                     <Text color="black" fontWeight="normal" fontSize="$5">
-                      Peet's Palace
+                      {brew.coffeeName}
                     </Text>
                   </YStack>
                 </FieldRow>
@@ -189,7 +189,7 @@ export default function ID() {
                       Water Target:
                     </Text>
                     <Text color="black" fontWeight="normal" fontSize="$5">
-                      340g
+                      {brew.targetWaterGrams}g
                     </Text>
                   </YStack>
                   <YStack alignItems="center">
@@ -197,7 +197,7 @@ export default function ID() {
                       Temp:
                     </Text>
                     <Text color="black" fontWeight="normal" fontSize="$5">
-                      195F
+                      {brew.waterTemp}F
                     </Text>
                   </YStack>
                   <YStack flex={1} justifyContent="center" alignItems="center">
@@ -205,7 +205,7 @@ export default function ID() {
                       Water Actual:
                     </Text>
                     <Text color="black" fontWeight="normal" fontSize="$5">
-                      355g
+                      {brew.actualWaterGrams}g
                     </Text>
                   </YStack>
                 </FieldRow>
@@ -218,8 +218,7 @@ export default function ID() {
             <StyledCardHeader>
               <H2 fontSize={"$8"}>Notes:</H2>
               <Paragraph>
-                Smooth cold brew with creamy vanilla finish. Super Good! Loved
-                it. Wish it was faster...Meow......moew.....
+                {brew.notes}
               </Paragraph>
             </StyledCardHeader>
           </StyledCardLarge>
