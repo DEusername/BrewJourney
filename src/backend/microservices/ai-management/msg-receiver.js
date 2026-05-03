@@ -13,11 +13,6 @@ const aiRequestSchema = {
     context: {
         required: true,
         type: "object"
-    },
-
-    options: {
-        required: false,
-        type: "object"
     }
 };
 
