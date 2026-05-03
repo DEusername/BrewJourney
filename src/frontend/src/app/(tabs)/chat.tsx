@@ -2,23 +2,20 @@ import React, { useState, useEffect } from "react";
 import { YStack, styled, Input, Button } from "tamagui";
 import PageHeader from "../../components/PageHeader";
 import { FlatList, KeyboardAvoidingView, Platform, View, Text, StyleSheet, StatusBar } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import backend_port from "../../environment";
 
 const userId = 67;
 
-type ItemProps = {title: string};
-
-const Item = ({title}: ItemProps) => (
-  <View style={styles.item}>
-    <Text style={styles.title}>{title}</Text>
+const Item = ({content}) => (
+  <View style={styless.item}>
+    <Text style={styless.content}>{content}</Text>
   </View>
 );
 
-const styles = StyleSheet.create({
+const styless = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
   },
   item: {
     backgroundColor: '#f9c2ff',
@@ -38,33 +35,49 @@ export default function Chat() {
 
   const fetchConversations = async () => {
 
-    const response = await fetch(`${backend_port}/conversations/${userId}`);
+    console.log("fetching messages");
+    const response = await fetch(`${backend_port}/conversations/${1}`);
     const data = await response.json();
 
-    console.log(data);
-    setMessages(data);
+    console.log("Past messages: ", data);
+    let newArray = [];
 
-    /*
-    data.forEach(function(message) { // if error, ignore
+    data.forEach(function(aiMessage) { // if error, ignore
       
-      if (message.role == "model"){
+
+      if (aiMessage.role == "model"){
         // ai message
-      } else if (message.role == "user"){
+        const incomingMessage = {
+          id: 1,
+          content: [aiMessage.RECOMMENDATIONS]
+        }
+        newArray.push(incomingMessage);
+      } else if (aiMessage.role == "user"){
         // user message
+        // ai message
+        const incomingMessage = {
+          id: 1,
+          content: aiMessage.CURRENT_USER_MESSAGE
+        }
+        newArray.push(incomingMessage);
       }
-      
+
+      console.log(newArray);
 
     });
-    */
+
+    console.log(newArray);
+    setMessages(newArray);
 
   };
 
   const sendMessage = async () => {
 
+    console.log("Sending a message")
     const response = await fetch(`${backend_port}/ai/coaching`, {
       method: "POST",
       headers: {"Content-Type": "application/json"},
-      body: {userID: userId, conversationID: 1, message: input}
+      body: JSON.stringify({userID: userId, conversationID: 1, message: input})
     })
 
     const data = await response.json();
@@ -82,19 +95,17 @@ export default function Chat() {
   return (
     <Container>
       <PageHeader title="Barista Chat" />
-      <SafeAreaView>
-        <FlatList
-          data={messages}
-          renderItem={({item}) => <Item title={item.title} />}
-          keyExtractor={item => item.id}
-        />
-      </SafeAreaView>
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={{ flex: 1 }}
         keyboardVerticalOffset={0}
       >
-        <YStack flex={1} />
+        <YStack/>
+        <FlatList style={styless.container}
+          data={messages}
+          renderItem={({item}) => <Item content={item.content} />}
+          keyExtractor={item => item.id}
+        />
         <Content>
           <InputField value={input} onChangeText={setInput} />
           <SendBtn onPress={() => sendMessage()}>Send</SendBtn>

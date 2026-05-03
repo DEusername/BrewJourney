@@ -13,6 +13,8 @@ sock.connect("tcp://127.0.0.1:4001");
 // expects req.body.conversationID
 
 router.post("/coaching", async (req, res) => {
+
+    console.log(1)
     req.body.userID = parseInt(req.body.userID);
     req.body.conversationID = parseInt(req.body.conversationID)
 
@@ -35,6 +37,7 @@ router.post("/coaching", async (req, res) => {
     })
     // console.log("user making AI request:", user);
 
+    console.log(2)
     // process message logs (logs must exist to call AI)
     const logs = await prisma.brewLogs.findMany({
         where: {
@@ -73,6 +76,7 @@ router.post("/coaching", async (req, res) => {
             createdOn: true
         }
     })
+    console.log(3)
     console.log("recent brew logs for user:", logs);
     if (logs.length == 0)
         res.send({ msg: "User must already have logs stored" }).status(200)
@@ -149,6 +153,7 @@ router.post("/coaching", async (req, res) => {
     const [reply] = await sock.receive();
     const parsedReply = JSON.parse(reply.toString())
 
+    console.log("!!!!!!!!!", parsedReply);
     // update conversation with a new summary
     const summaryTextString = parsedReply.CONVERSATION_SUMMARY.summary;
     console.log("Summary text string: ", summaryTextString);

@@ -25,11 +25,14 @@ router.get("/users/:id", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
 
+    console.log(1)
     const convoID = parseInt(req.params.id);
+    console.log("Convo: ", convoID)
 
     if (isNaN(convoID)) {
         return res.status(400).send({ error: "Invalid id" });
     }
+    console.log(2)
 
     const recentMessages = await prisma.messages.findMany({
         where: {
@@ -43,6 +46,7 @@ router.get("/:id", async (req, res) => {
         }
     });
 
+    console.log(3, recentMessages)
     let geminiFormattedMessages = [];
 
     for (let i = 0; i < recentMessages.length; i++) {
@@ -72,6 +76,7 @@ router.get("/:id", async (req, res) => {
         }
     }
 
+    console.log("Output: ", geminiFormattedMessages)
     return res.status(200).json(geminiFormattedMessages);
 });
 
