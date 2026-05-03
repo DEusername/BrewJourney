@@ -18,7 +18,6 @@ import Select2 from "./Select2";
 export function FormsDemo() {
   const [status, setStatus] = React.useState<"off" | "submitting">("off");
 
-  // form state
   const [method, setMethod] = React.useState("");
   const [grinder, setGrinder] = React.useState("");
   const [dose, setDose] = React.useState("");
@@ -82,84 +81,47 @@ export function FormsDemo() {
           <Label style={styles.subheader} htmlFor="dose">
             Dose
           </Label>
-          <Input
-            id="dose"
-            value={dose}
-            onChangeText={setDose}
-            placeholder="Enter the dose"
+          <Input id="dose" value={dose} onChangeText={setDose} placeholder="Enter the dose"
           />
           <Label style={styles.subheader} htmlFor="ratio">
             Ratio
           </Label>
-          <Input
-            id="ratio"
-            value={ratio}
-            onChangeText={setRatio}
-            placeholder="Enter the ratio"
+          <Input id="ratio" value={ratio} onChangeText={setRatio} placeholder="Enter the ratio"
           />
           <Label style={styles.subheader} htmlFor="grindSize">
             Grind Size
           </Label>
-          <Input
-            id="grindSize"
-            value={grindSize}
-            onChangeText={setGrindSize}
-            placeholder="Enter grind size"
+          <Input id="grindSize" value={grindSize} onChangeText={setGrindSize} placeholder="Enter grind size"
           />
           <Label style={styles.subheader} htmlFor="roastLevel">
             Roast Level
           </Label>
-          <Input
-            id="roastLevel"
-            value={roastLevel}
-            onChangeText={setRoastLevel}
-            placeholder="Enter roast level"
+          <Input id="roastLevel" value={roastLevel} onChangeText={setRoastLevel} placeholder="Enter roast level"
           />
           <Label style={styles.subheader} htmlFor="coffeeType">
             Coffee Type
           </Label>
-          <Input
-            id="coffeeType"
-            value={coffeeType}
-            onChangeText={setCoffeeType}
-            placeholder="Enter coffee type"
+          <Input id="coffeeType" value={coffeeType} onChangeText={setCoffeeType} placeholder="Enter coffee type"
           />
           <Label style={styles.subheader} htmlFor="waterTarget">
             Water Target (g)
           </Label>
-          <Input
-            id="waterTarget"
-            value={waterTarget}
-            onChangeText={setWaterTarget}
-            placeholder="Enter target water"
+          <Input id="waterTarget" value={waterTarget} onChangeText={setWaterTarget} placeholder="Enter target water"
           />
           <Label style={styles.subheader} htmlFor="temp">
             Temperature
           </Label>
-          <Input
-            id="temp"
-            value={temp}
-            onChangeText={setTemp}
-            placeholder="Enter temperature"
+          <Input id="temp" value={temp} onChangeText={setTemp} placeholder="Enter temperature"
           />
           <Label style={styles.subheader} htmlFor="waterActual">
             Water Actual
           </Label>
-          <Input
-            id="waterActual"
-            value={waterActual}
-            onChangeText={setWaterActual}
-            placeholder="Enter actual water"
+          <Input id="waterActual" value={waterActual} onChangeText={setWaterActual} placeholder="Enter actual water"
           />
           <Label style={styles.subheader} htmlFor="notes">
             Notes
           </Label>
-          <TextArea
-            id="notes"
-            value={notes}
-            onChangeText={setNotes}
-            placeholder="Enter notes"
-          />
+          <TextArea id="notes" value={notes} onChangeText={setNotes} placeholder="Enter Notes" />
         </YStack>
       </ScrollView>
 
