@@ -8,7 +8,6 @@ const port = process.env.PORT || 4001
 app.use(express.json());
 
 const aiRequestSchema = {
-    mode: { required: true },
     message: { required: false },
 
     context: {
