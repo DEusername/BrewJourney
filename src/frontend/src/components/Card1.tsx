@@ -15,11 +15,11 @@ export default function BrewCard({ title, description, href }: BrewCardProps) {
         <YStack flex={1} p="$4" gap="$3">
           <XStack justifyContent="space-between" alignItems="center">
             <H2>{title}</H2>
-            <Link href={href}>
+            
                 <Button onPress={() => navigation.navigate(href)} size="$4" borderWidth={2}>
                 See Details
                 </Button>
-            </Link>
+           
           </XStack>
           <Paragraph>{description}</Paragraph>
         </YStack>

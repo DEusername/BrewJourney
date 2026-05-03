@@ -1,13 +1,10 @@
 import { Text, View, StyleSheet, Pressable } from "react-native";
-import { Link } from "expo-router";
-
-
+import  TabLayout  from "./_layout";
+import { Redirect, Stack } from "expo-router";
 
 export default function Tab() {
   return (
-    <View>
-      <Text>Tab [Home|Settings]</Text>
-    </View>
+    <Redirect href="/home" />
   );
 }
 
