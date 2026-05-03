@@ -35,6 +35,8 @@ async function promptConstructor(request) {
             ]
     })
 
+    console.log(contentsArr)
+
     // For demonstration, just return a dummy Gemini prompt
     return contentsArr
 }

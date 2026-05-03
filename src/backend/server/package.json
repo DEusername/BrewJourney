@@ -1,28 +1,29 @@
 {
-  "name": "server",
-  "version": "1.0.0",
-  "description": "server for handling requests for brewjourney",
-  "license": "ISC",
-  "author": "",
-  "type": "module",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "db:deploy": "npx prisma migrate deploy && npx prisma generate"
-  },
-  "dependencies": {
-    "@prisma/adapter-pg": "^7.8.0",
-    "@prisma/client": "^7.8.0",
-    "bcrypt": "^6.0.0",
-    "cors": "^2.8.6",
-    "dotenv": "^17.4.2",
-    "express": "^5.2.1",
-    "pg": "^8.20.0"
-  },
-  "devDependencies": {
-    "@types/pg": "^8.20.0",
-    "nodemon": "^3.1.14",
-    "prisma": "^7.8.0"
-  }
+    "name": "server",
+    "version": "1.0.0",
+    "description": "server for handling requests for brewjourney",
+    "license": "ISC",
+    "author": "",
+    "type": "module",
+    "main": "server.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node server.js",
+        "db:deploy": "npx prisma migrate deploy && npx prisma generate"
+    },
+    "dependencies": {
+        "@prisma/adapter-pg": "^7.8.0",
+        "@prisma/client": "^7.8.0",
+        "bcrypt": "^6.0.0",
+        "cors": "^2.8.6",
+        "dotenv": "^17.4.2",
+        "express": "^5.2.1",
+        "pg": "^8.20.0",
+        "zeromq": "^6.5.0"
+    },
+    "devDependencies": {
+        "@types/pg": "^8.20.0",
+        "nodemon": "^3.1.14",
+        "prisma": "^7.8.0"
+    }
 }
