@@ -2,6 +2,14 @@ import { createContext } from 'react';
 import { NativeTabs } from "expo-router/unstable-native-tabs";
 import { TamaguiProvider } from 'tamagui';
 import tamaguiConfig from '../../tamagui.config';
+import home from './home';
+import addABrew from './addABrew';
+import chat from './chat';
+import data from './data';
+import details from './details/[id]';
+import * as React from 'react';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {useNavigation} from '@react-navigation/native';
 
 export interface BrewItem {// temp type for brew
   id: string;
@@ -33,7 +41,18 @@ const brewList: BrewItem[] = [// Sample brew items
 
 export const BrewListContext = createContext<BrewItem[]>(brewList);
 
+const RootLayout = createNativeStackNavigator( {
+  screens: {
+    home: { screen: home },
+    addABrew: { screen: addABrew },
+    chat: { screen: chat },
+    data: { screen: data },
+    details: { screen: details},
+  },
+});
+
 export default function TabLayout() {// Provide brew list to the app, also set up the tab navigation structure
+   const navigation = useNavigation();
   return (
     <TamaguiProvider config={tamaguiConfig} defaultTheme="light">
       <BrewListContext.Provider value={brewList}>
