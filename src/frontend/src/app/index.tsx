@@ -18,6 +18,7 @@ export default function Index() {
   const handleLogin = async () => {
     setLoading(true);
 
+    /*
     const formData = { email: email, password: password };
     console.log("FORM DATA:", formData);
 
@@ -43,6 +44,7 @@ export default function Index() {
         router.replace("/login");
       }, 800);
     }
+    */
 
     // setTimeout(() => {
     //   setLoading(false);

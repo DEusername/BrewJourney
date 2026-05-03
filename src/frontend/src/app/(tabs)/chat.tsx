@@ -1,23 +1,94 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { YStack, styled, Input, Button } from "tamagui";
 import PageHeader from "../../components/PageHeader";
-import { KeyboardAvoidingView, Platform } from "react-native";
+import { FlatList, KeyboardAvoidingView, Platform, View, Text, StyleSheet, StatusBar } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import backend_port from "../../environment";
-import { Text, StyleSheet } from "react-native";
 
+const userId = 67;
 
+type ItemProps = {title: string};
 
+const Item = ({title}: ItemProps) => (
+  <View style={styles.item}>
+    <Text style={styles.title}>{title}</Text>
+  </View>
+);
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: StatusBar.currentHeight || 0,
+  },
+  item: {
+    backgroundColor: '#f9c2ff',
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+  title: {
+    fontSize: 32,
+  },
+});
 
 export default function Chat() {
   const [input, setInput] = useState("");
-  const [response, setResponse] = useState("");
+  const [messages, setMessages] = useState([]);
+  const [lastInput, setLastInput] = useState([]);
+
+  const fetchConversations = async () => {
+
+    const response = await fetch(`${backend_port}/conversations/${userId}`);
+    const data = await response.json();
+
+    console.log(data);
+    setMessages(data);
+
+    /*
+    data.forEach(function(message) { // if error, ignore
+      
+      if (message.role == "model"){
+        // ai message
+      } else if (message.role == "user"){
+        // user message
+      }
+      
+
+    });
+    */
+
+  };
+
+  const sendMessage = async () => {
+
+    const response = await fetch(`${backend_port}/ai/coaching`, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: {userID: userId, conversationID: 1, message: input}
+    })
+
+    const data = await response.json();
+
+    console.log(data);
+
+  }
+
+  useEffect(() => {
+
+    fetchConversations();
+
+  }, [])
 
   return (
     <Container>
       <PageHeader title="Barista Chat" />
-      <Text style={styles.output}>
-        {response || "Waiting for response..."}
-      </Text>
+      <SafeAreaView>
+        <FlatList
+          data={messages}
+          renderItem={({item}) => <Item title={item.title} />}
+          keyExtractor={item => item.id}
+        />
+      </SafeAreaView>
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={{ flex: 1 }}
@@ -26,7 +97,7 @@ export default function Chat() {
         <YStack flex={1} />
         <Content>
           <InputField value={input} onChangeText={setInput} />
-          <SendBtn onPress={() => console.log("Send:", input)}>Send</SendBtn>
+          <SendBtn onPress={() => sendMessage()}>Send</SendBtn>
         </Content>
       </KeyboardAvoidingView>
     </Container>
