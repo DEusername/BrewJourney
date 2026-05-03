@@ -14,6 +14,8 @@ import {
   Input,
 } from 'tamagui'
 
+import  Select1  from './Select1'
+
 export function FormsDemo() {
   const [name, setName] = React.useState('')
   const [email, setEmail] = React.useState('')
@@ -32,7 +34,7 @@ export function FormsDemo() {
     <Form
       alignContent="center"
       gap="$4"
-      width="80%"
+      width="100%"
       onSubmit={() => setStatus('submitting')}
       borderWidth={1}
       bg="$color2"
@@ -40,10 +42,10 @@ export function FormsDemo() {
 
       p="$6"
     >
-        <Label htmlFor="name">Name</Label>
-        <Input id="name" placeholder="Enter your name" />
-        <Label htmlFor="email">Email</Label>
-        <Input id="email" placeholder="Enter your email" />
+        <Label htmlFor="method">Method</Label>
+        <Select1 />
+        <Label htmlFor="emailAddress">Email</Label>
+        <Input id="emailAddress" placeholder="Enter your email" />
     <Form.Trigger asChild>
       <Button>Submit</Button>
     </Form.Trigger>
