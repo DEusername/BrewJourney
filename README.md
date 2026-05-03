@@ -25,11 +25,10 @@ BrewJourney aims to bridge the gap between logging data and gaining actual insig
 ## Future of BrewJourney
 - AI-Generated Brew Briefs: Implement a 'My Data' page which synthesizes the user's historical brew logs into concise, actionable reports. Users can select a specific brew method (i.e. French Press, Espresso) or time period (i.e. 1 week, 1 month) to receive AI-generated insights on their average extraction values—allowing them to "re-dial" in a coffee they haven't brewed in months with instant, data-backed precision.
 - Flavor Profile Mapping: A dynamic "Spider Graph" (Radar Chart) that visualizes a user's taste preferences over time. As the user logs more brews, the AI maps out whether they prefer an acidic, rich dark roast, or a vibrant, fruity light roast. 
-- _X? maybe 2 is enuff?_
 
 ## The Team
 ### Built with ☕ by:
-- Duncan Everson - AI-Related Route Handling, Microservice Development, Server Interactions.
+- Duncan Everson - AI-Related Route Handling, Microservice Development, AI-related Server-DB Interactions.
 - Dylan Knapp - Database Implementation, Server-Side Routing, X. 
 - Dylan Keyhantaj - Frontend, UI/UX, Database Design, App Design. 
 - Ethan Ossana - Frontend Architecture, Client-Side Routing, Navigation. 
