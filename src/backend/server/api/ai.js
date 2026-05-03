@@ -172,7 +172,7 @@ router.post("/coaching", async (req, res) => {
     let modelSpecificResponseObj = {
         DIAGNOSIS: parsedReply.DIAGNOSIS,
         REASONING: parsedReply.REASONING,
-        RECOMMENDATION: parsedReply.RECOMMENDATION
+        RECOMMENDATIONS: parsedReply.RECOMMENDATIONS
     }
     let assembledModelMsg = { role: 'model' }
     assembledModelMsg.parts = [{ text: JSON.stringify(modelSpecificResponseObj) }]
