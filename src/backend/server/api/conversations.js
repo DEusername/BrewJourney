@@ -56,21 +56,18 @@ router.get("/:id", async (req, res) => {
             continue;
         }
 
+        const role = parsed?.role;
         if (parsed?.role && parsed?.parts) {
-            if (parsed.role === "model") {
-                console.log(parsed)
-                try {
-                    let parsedTextObj = {}
-                    parsedTextObj = JSON.parse(parsed.parts[0].text);
-                    parsedTextObj.role = "model"
-                    geminiFormattedMessages.push(parsedTextObj)
-                } catch (err) {
-                    console.log("Failed to parse model message:", err);
-                    geminiFormattedMessages.push(parsed);
-                }
-            }
-            else
+            console.log(parsed)
+            try {
+                let parsedTextObj = {}
+                parsedTextObj = JSON.parse(parsed.parts[0].text);
+                parsedTextObj.role = role
+                geminiFormattedMessages.push(parsedTextObj)
+            } catch (err) {
+                console.log("Failed to parse model message:", err);
                 geminiFormattedMessages.push(parsed);
+            }
         }
     }
 
