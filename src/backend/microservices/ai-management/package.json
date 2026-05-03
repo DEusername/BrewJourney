@@ -1,0 +1,19 @@
+{
+    "name": "ai-management",
+    "version": "1.0.0",
+    "description": "an ai management project to read values from a db, following explicit prisma models, and using that information to query gemini",
+    "license": "ISC",
+    "author": "",
+    "type": "module",
+    "main": "msg-receiver.js",
+    "scripts": {
+        "start": "node msg-receiver.js",
+        "dev": "nodemon msg-receiver.js"
+    },
+    "dependencies": {
+        "@google/genai": "^1.51.0",
+        "dotenv": "^17.4.2",
+        "express": "^5.2.1",
+        "zeromq": "^6.5.0"
+    }
+}
