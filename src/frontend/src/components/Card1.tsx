@@ -7,6 +7,7 @@ interface BrewCardProps {
   description: string;
   href: string;
   brew: Logs;
+  rating: number;
 }
 
 interface Logs { 
@@ -49,13 +50,20 @@ const CardSubheading = styled(Paragraph, {
   color: "#411515be",
 });
 
-export default function BrewCard({title, description, href, brew}: BrewCardProps) {
+const renderStars = (rating: number) => {
+  const filled = "★".repeat(rating);
+  const hollow = "☆".repeat(5 - rating);
+  return filled + hollow;
+};
+
+
+export default function BrewCard({title, description, rating, href, brew}: BrewCardProps) {
   return (
     <StyledCard>
       <XStack flex={1}>
         <YStack flex={1} p="$3">
           <StyledH2>{title}</StyledH2>
-          <CardSubheading>{description}</CardSubheading>
+          <CardSubheading>{renderStars(rating)} - {brew.createdOn.split("T")[0]}</CardSubheading>
         </YStack>
         <YStack justifyContent="center" p="$3">
           <Link href={

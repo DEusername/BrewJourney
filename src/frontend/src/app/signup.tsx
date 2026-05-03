@@ -16,13 +16,13 @@ export default function Index() {
     const formData = { firstName:firstName, lastName:lastName, email:email, password:password };
     console.log("FORM DATA:", formData);
 
-    const response = await fetch(`${backend_port}/signup`, {
+    const response = await fetch(`${backend_port}/users/signup`, {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(formData)
     })
 
-    if (response.status == 200){
+    if (response.status == 201){
       // It worked!
       console.log("Sign up successful!");
       setTimeout(() => {

@@ -79,6 +79,7 @@ router.post("/login", async (req, res) => {
 	// Finds a user based on the email only, and compares the password after
 	const user = await prisma.users.findUnique({where: {email: email}});
 	console.log("returned ", user, " after searching for matching user");
+	console.log("password: ", user.password);
 	
 	if (user != null){
 		const hashedPassword = user.password;

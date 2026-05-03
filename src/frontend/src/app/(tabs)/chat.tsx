@@ -2,13 +2,22 @@ import React, { useState } from "react";
 import { YStack, styled, Input, Button } from "tamagui";
 import PageHeader from "../../components/PageHeader";
 import { KeyboardAvoidingView, Platform } from "react-native";
+import backend_port from "../../environment";
+import { Text, StyleSheet } from "react-native";
+
+
+
 
 export default function Chat() {
   const [input, setInput] = useState("");
+  const [response, setResponse] = useState("");
 
   return (
     <Container>
       <PageHeader title="Barista Chat" />
+      <Text style={styles.output}>
+        {response || "Waiting for response..."}
+      </Text>
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={{ flex: 1 }}
@@ -55,4 +64,10 @@ export const SendBtn = styled(Button, {
   borderRadius: "$4",
   borderWidth: "$1",
   borderColor: "#000000be",
+});
+
+const styles = StyleSheet.create({
+  output: {
+    flex: 1
+  },
 });

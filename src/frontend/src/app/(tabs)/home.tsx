@@ -72,6 +72,7 @@ export default function Home() {
                   description={brew.notes}
                   href={`/details/${brew.id}`}
                   brew={brew}
+                  rating={brew.resultRating}
                 />
               </View>
             ))}
