@@ -3,6 +3,26 @@ import prisma from '../lib/prisma.js';
 
 const router = Router()
 
+router.get("/users/:id", async (req, res) => {
+    const userID = parseInt(req.params.id);
+
+    const allUserConvos = await prisma.conversations.findMany({
+        where: {
+            userId: userID
+        },
+        orderBy: {
+            createdAt: "desc"
+        },
+        select: {
+            id: true,
+            title: true
+        }
+    });
+
+    return res.status(200).json(allUserConvos);
+
+});
+
 router.get("/:id", async (req, res) => {
     const convoID = parseInt(req.params.id);
 
