@@ -33,7 +33,7 @@ router.post("/coaching", async (req, res) => {
             }
         }
     })
-    console.log("user making AI request:", user);
+    // console.log("user making AI request:", user);
 
     // process message logs (logs must exist to call AI)
     const logs = await prisma.brewLogs.findMany({
@@ -90,7 +90,7 @@ router.post("/coaching", async (req, res) => {
             }
         })
     }
-    console.log("conversationSummary content: ", conversationSummary)
+    // console.log("conversationSummary content: ", conversationSummary)
 
     let recentMessages = [];
     if (req.body.conversationID != undefined) {
@@ -124,8 +124,7 @@ router.post("/coaching", async (req, res) => {
             console.log("Skipping bad message JSON:", raw);
         }
     }
-
-    console.log("recent conversation messages for user:", geminiFormattedMessages);
+    // console.log("recent conversation messages for user:", geminiFormattedMessages);
 
 
     const payload = {
@@ -147,6 +146,44 @@ router.post("/coaching", async (req, res) => {
 
     const [reply] = await sock.receive();
     const parsedReply = JSON.parse(reply.toString())
+
+    // update conversation with a new summary
+    const summaryTextString = parsedReply.CONVERSATION_SUMMARY.summary;
+    console.log("Summary text string: ", summaryTextString);
+    prisma.conversations.update({
+        where: {
+            id: req.body.conversationID
+        },
+        data: {
+            summary: summaryTextString
+        }
+    })
+
+    // store last assembled user message
+    console.log("user message :", JSON.stringify(parsedReply.userPrompt))
+    await prisma.messages.create({
+        data: {
+            conversationId: req.body.conversationID,
+            context: JSON.stringify(parsedReply.userPrompt)
+        }
+    });
+
+    // store model message
+    let modelSpecificResponseObj = {
+        DIAGNOSIS: parsedReply.DIAGNOSIS,
+        REASONING: parsedReply.REASONING,
+        RECOMMENDATION: parsedReply.RECOMMENDATION
+    }
+    let assembledModelMsg = { role: 'model' }
+    assembledModelMsg.parts = [{ text: JSON.stringify(modelSpecificResponseObj) }]
+    await prisma.messages.create({
+        data: {
+            conversationId: req.body.conversationID,
+            context: JSON.stringify(assembledModelMsg)
+        }
+    });
+    console.log("Assembled Model Msg: ", assembledModelMsg)
+
     res.send(parsedReply).status(200);
     console.log("parsed reply: ", parsedReply);
     return;
