@@ -42,7 +42,7 @@ const StyledCardLarge = styled(Card, {
   size: "$4",
   borderWidth: 1,
   width: "102%",
-  backgroundColor: "#99ba90",
+  backgroundColor: "#a4966c",
 });
 
 const StyledCardMed = styled(Card, {
@@ -64,22 +64,15 @@ const StyledCardSmall = styled(Card, {
   borderRadius: "$10",
   width: "102%",
   backgroundColor: "#68afd0",
-  height: "$4",
+  height: "$5",
+  pressStyle: {
+    opacity: 0.8,
+    scale: 0.98,
+  },
 });
 
 const StyledCardHeader = styled(Card.Header, {
   padding: "$3",
-});
-
-//each subsection of each card
-const InnerCardField = styled(Text, {
-  color: "black",
-  paddingTop: "$0",
-  paddingBottom: "$2",
-  fontWeight: "bold",
-  fontSize: "$5",
-  flex: 1,
-  textAlign: "center",
 });
 
 //the x-directional row of each card
@@ -121,7 +114,7 @@ export default function ID() {
       <SubHeading>{renderStars(rating)}</SubHeading>
       <ContentStack>
         <CenterRow>
-          <StyledCardMed marginTop={"$-10"}>
+          <StyledCardMed marginTop={"$-6"}>
             <StyledCardHeader>
               <YStack>
                 <FieldRow>
@@ -215,17 +208,29 @@ export default function ID() {
         <CenterRow>
           <StyledCardLarge>
             <StyledCardHeader>
-              <H2>Notes:</H2>
-              <Paragraph>Now available</Paragraph>
+              <H2 fontSize={"$8"}>Notes:</H2>
+              <Paragraph>
+                Smooth cold brew with creamy vanilla finish. Super Good! Loved
+                it. Wish it was faster...Meow......moew.....
+              </Paragraph>
             </StyledCardHeader>
           </StyledCardLarge>
         </CenterRow>
         <CenterRow>
-          <StyledCardSmall>
-            <StyledCardHeader>
-              <H2>Talk to AI</H2>
-              <Paragraph>Now available</Paragraph>
-            </StyledCardHeader>
+          <StyledCardSmall
+            borderWidth={"$1"}
+            borderColor={"#1f336b"}
+            onPress={() => console.log("Talking to Brewy...")} //FIXME
+          >
+            <H3
+              fontStyle="italic"
+              fontWeight={"normal"}
+              fontSize={"$5"}
+              textAlign="center"
+              paddingTop="$2"
+            >
+              Talk to Brewy about this?
+            </H3>
           </StyledCardSmall>
         </CenterRow>
       </ContentStack>
