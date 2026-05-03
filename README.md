@@ -20,7 +20,7 @@ BrewJourney was built during BeaverHacks 2026 at Oregon State University to solv
 
 ## The Team
 ### Built with ☕ by:
-- Duncan Everson - 
-- Dylan Knapp - 
-- Dylan Keyhantaj - Frontend, UI/UX, Database Design
-- Ethan Ossana - 
+- Duncan Everson - AI-Related Server Interactions, Microservice Development, Server Interactions
+- Dylan Knapp - Database Implementation, Server-Side Routing, X. 
+- Dylan Keyhantaj - Frontend, UI/UX, Database Design, App Design. 
+- Ethan Ossana - Frontend Architecture, Client-Side Routing, Navigation. 
