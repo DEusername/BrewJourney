@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { ScrollView } from "react-native";
+import backend_port from "../environment";
 
 import {
   Button,
@@ -20,33 +21,56 @@ export function FormsDemo() {
 
   const [method, setMethod] = React.useState("");
   const [grinder, setGrinder] = React.useState("");
-  const [dose, setDose] = React.useState("");
+  const [dose, setDose] = React.useState(0);
   const [ratio, setRatio] = React.useState("");
-  const [grindSize, setGrindSize] = React.useState("");
-  const [roastLevel, setRoastLevel] = React.useState("");
+  const [grindSize, setGrindSize] = React.useState(0);
+  const [roastLevel, setRoastLevel] = React.useState(""); // Need to setup as enum
   const [coffeeType, setCoffeeType] = React.useState("");
-  const [waterTarget, setWaterTarget] = React.useState("");
-  const [temp, setTemp] = React.useState("");
-  const [waterActual, setWaterActual] = React.useState("");
+  const [waterTarget, setWaterTarget] = React.useState(0);
+  const [temp, setTemp] = React.useState(0);
+  const [waterActual, setWaterActual] = React.useState(0);
   const [notes, setNotes] = React.useState("");
+  const [resultRating, setResultRating] = React.useState("");
+  const [brewTimeSeconds, setBrewTimeSeconds] = React.useState("");
 
-  const handleSubmit = () => {
+  const userId = 67;
+  const grinderId = 12;
+  const brewMethodId = 5;
+
+  const handleSubmit = async () => {
     setStatus("submitting");
 
     const formData = {
-      method,
-      dose,
-      ratio,
-      grindSize,
-      roastLevel,
-      coffeeType,
-      waterTarget,
-      temp,
-      waterActual,
-      notes,
+      userId: userId,
+      grinderId: grinderId,
+      brewMethodId: brewMethodId,
+      doseGrams: dose,
+      targetRatio: ratio,
+      grindSize: grindSize,
+      roastLevel: roastLevel,
+      coffeeName: coffeeType,
+      targetWaterGrams: waterTarget,
+      waterTemp: temp,
+      actualWaterGrams: waterActual,
+      brewTimeSeconds: brewTimeSeconds,
+      resultRating: resultRating,
+      notes: notes,
     };
 
     console.log("FORM DATA:", formData);
+
+    const response = await fetch(`${backend_port}/brewlogs/create`, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(formData)
+    })
+
+    if (response.status == 200){
+      // It worked!
+      console.log("Brew log successfully added")
+    } else {
+      console.log("Trouble adding brew log :(")
+    }
 
     setTimeout(() => setStatus("off"), 1500);
   };
@@ -118,6 +142,16 @@ export function FormsDemo() {
           </Label>
           <Input id="waterActual" value={waterActual} onChangeText={setWaterActual} placeholder="Enter actual water"
           />
+          <Label style={styles.subheader} htmlFor="brewTimeSeconds">
+            Brew Time
+          </Label>
+          <Input id="brewTimeseconds" value={brewTimeSeconds} onChangeText={setBrewTimeSeconds} placeholder="Enter the brew time (seconds)"
+          />
+          <Label style={styles.subheader} htmlFor="resultRating">
+            Result Rating
+          </Label>
+          <Input id="resultRating" value={resultRating} onChangeText={setResultRating} placeholder="Enter the result rating"
+          />
           <Label style={styles.subheader} htmlFor="notes">
             Notes
           </Label>
@@ -127,7 +161,7 @@ export function FormsDemo() {
 
       <Form.Trigger asChild>
         <Button disabled={status === "submitting"}>
-          {status === "submitting" ? "Submitting..." : "Submit"}
+          {status === "submitting" ? "Submitting..." : "Submit!"}
         </Button>
       </Form.Trigger>
     </Form>

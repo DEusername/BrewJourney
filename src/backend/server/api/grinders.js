@@ -8,6 +8,8 @@ router.post("/add", async (req, res) => {
 	const userId = req.body.id; // Will be used to add grinder to user's data in the database
 	const grinderFields = req.body.grinderFields;
 
+	console.log(grinderFields)
+
 	// Assumes req.body.grinderFields is in the correct format
 	/*
 	grinderFields: {
@@ -58,6 +60,25 @@ router.post("/find", async (req, res) => {
 		});
 		console.log("Found grinder! Here: ", grinder);
 		res.status(200).send(`Found grinder! Here: ${grinder}`);
+	} catch (err) {
+		console.log("Error finding grinder: ", err);
+		res.status(404).send("Couldn't find grinder");
+	}
+
+});
+
+// Get a grinder by a user's id
+router.post("/findgrinder", async (req, res) => {
+	
+	const id = req.body.id;
+
+	try {
+		const user = await prisma.users.findUnique({
+			where : {id: id}
+		});
+		console.log("Found user! Here: ", user);
+		const grinder = await prisma.grinders.findUnique({where : {id: user.grinderId}});
+		res.status(200).send(grinder);
 	} catch (err) {
 		console.log("Error finding grinder: ", err);
 		res.status(404).send("Couldn't find grinder");
