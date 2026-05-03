@@ -1,37 +1,58 @@
-import { Text, TextInput, View } from "react-native";
-import { StyleSheet } from "react-native";
-import { Input } from "@tamagui/input";
-import { Button } from "tamagui";
+import React, { useState } from "react";
+import { YStack, styled, Input, Button } from "tamagui";
 import PageHeader from "../../components/PageHeader";
-import { useState } from "react";
-import React from "react";
-
+import { KeyboardAvoidingView, Platform } from "react-native";
 
 export default function Chat() {
-  const [messages, setMessages] = React.useState<string[]>([]);
-  const [input, setInput] = React.useState("");
+  const [input, setInput] = useState("");
+
   return (
-    <View style={styles.container}>
-      <PageHeader title="Chat" />
-      <View style={styles.content}>
-        <Input size="$4" borderWidth={2} placeholder="Type your message here" />
-      <Button size="$4" borderWidth={2} onPress={() => console.log("Send message")}>
-        Send
-      </Button>
-      </View>
-    </View>
+    <Container>
+      <PageHeader title="Barista Chat" />
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{ flex: 1 }}
+        keyboardVerticalOffset={0}
+      >
+        <YStack flex={1} />
+        <Content>
+          <InputField value={input} onChangeText={setInput} />
+          <SendBtn onPress={() => console.log("Send:", input)}>Send</SendBtn>
+        </Content>
+      </KeyboardAvoidingView>
+    </Container>
   );
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  content: {
-    flex: 1,
-    width: "100%",
-    paddingHorizontal: 16,
-    paddingBottom: 40
-  },
+
+//main wrapper
+export const Container = styled(YStack, {
+  flex: 1,
+});
+
+//area holding inputs
+export const Content = styled(YStack, {
+  width: "100%",
+  padding: "$4",
+  justifyContent: "flex-start",
+  gap: "$3",
+  paddingBottom: Platform.OS === "ios" ? "$6" : "$4", // Extra padding for the "home bar"
+});
+
+export const InputField = styled(Input, {
+  width: "100%",
+  height: "$8",
+  borderRadius: "$4",
+  borderWidth: "$1",
+  borderColor: "#411515be",
+  placeholder: "Ask Brewy a question:",
+  placeholderTextColor: "$gray10Dark",
+});
+
+export const SendBtn = styled(Button, {
+  width: "100%",
+  height: "$5",
+  backgroundColor: "#68afd0",
+  borderRadius: "$4",
+  borderWidth: "$1",
+  borderColor: "#000000be",
 });

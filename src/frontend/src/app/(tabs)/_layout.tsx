@@ -5,7 +5,6 @@ import { Tabs } from "expo-router";
 import * as React from "react";
 import { Ionicons } from "@expo/vector-icons";
 
-
 export interface BrewItem {
   // temp type for brew
   id: string;
@@ -72,61 +71,87 @@ const brewList: BrewItem[] = [
 
 export const BrewListContext = createContext<BrewItem[]>(brewList);
 
-
-
-export default function TabLayout() {// Provide brew list to the app, also set up the tab navigation structure
+export default function TabLayout() {
+  // Provide brew list to the app, also set up the tab navigation structure
 
   async function getLogs() {
     const brewList = await fetch("/brewlogs/all", {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'content.type': 'application/json'
+        "content.type": "application/json",
       },
-      body: JSON.stringify({id: userId})
-    })
+      body: JSON.stringify({ id: userId }),
+    });
 
     return brewList;
   }
 
-  useEffect( () => {
+  useEffect(() => {
     // This runs once when the component mounts
     console.log("Screen loaded!");
 
     const getLogs = async () => {
       const response = await fetch("/brewlogs/all", {
-        method: 'POST',
-        body: JSON.stringify({id: userId}),
-        headers: {'Content-type': 'application/json'},
+        method: "POST",
+        body: JSON.stringify({ id: userId }),
+        headers: { "Content-type": "application/json" },
       });
-      const data = await response.json()
+      const data = await response.json();
       console.log("Data: ", data);
-    }
+    };
 
     getLogs();
 
     // Optional: Cleanup function when component unmounts
     return () => console.log("Screen unmounted");
-  }, []); 
+  }, []);
 
   return (
     <TamaguiProvider config={tamaguiConfig} defaultTheme="light">
-        <BrewListContext.Provider value={brewList}>
-          <Tabs
+      <BrewListContext.Provider value={brewList}>
+        <Tabs
           screenOptions={{
             headerShown: false,
           }}
         >
-          <Tabs.Screen name="home" options={{ title: "Home", tabBarIcon: ({ color, size }) => (
-            <Ionicons name="home" size={size} color={color} /> ) }} />
-          <Tabs.Screen name="addABrew" options={{ title: "Add a Brew", tabBarIcon: ({ color, size }) => (
-            <Ionicons name="cafe" size={size} color={color} /> ) }} />
-          <Tabs.Screen name="chat" options={{ title: "Barista Chat", tabBarIcon: ({ color, size }) => (
-            <Ionicons name="sparkles" size={size} color={color} /> ) }} />
-          <Tabs.Screen name="data" options={{ title: "My Data", tabBarIcon: ({ color, size }) => (
-            <Ionicons name="bar-chart" size={size} color={color} /> ) }} />
+          <Tabs.Screen
+            name="home"
+            options={{
+              title: "Home",
+              tabBarIcon: ({ color, size }) => (
+                <Ionicons name="home" size={size} color={color} />
+              ),
+            }}
+          />
+          <Tabs.Screen
+            name="addABrew"
+            options={{
+              title: "Add a Brew",
+              tabBarIcon: ({ color, size }) => (
+                <Ionicons name="cafe" size={size} color={color} />
+              ),
+            }}
+          />
+          <Tabs.Screen
+            name="chat"
+            options={{
+              title: "Barista Chat",
+              tabBarIcon: ({ color, size }) => (
+                <Ionicons name="sparkles" size={size} color={color} />
+              ),
+            }}
+          />
+          <Tabs.Screen
+            name="data"
+            options={{
+              title: "My Data",
+              tabBarIcon: ({ color, size }) => (
+                <Ionicons name="bar-chart" size={size} color={color} />
+              ),
+            }}
+          />
         </Tabs>
-        </BrewListContext.Provider>
+      </BrewListContext.Provider>
     </TamaguiProvider>
-    
   );
 }
