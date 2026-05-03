@@ -7,51 +7,13 @@ const ai = new GoogleGenAI({
     apiKey: process.env.GEMINI_API_KEY
 });
 
-const responseSchema =
-{
-    "type": "object",
-    "properties": {
-        "DIAGNOSIS": {
-            "type": "string",
-            "description": "Primary issue (e.g. under-extraction, channeling, etc.)"
-        },
-        "REASONING": {
-            "type": "string",
-            "description": "Explanation of what is likely wrong with the brewing method"
-        },
-        "RECOMMENDATIONS": {
-            "type": "array",
-            "items": {
-                "type": "string"
-            },
-            "description": "Actionable steps the user should take next"
-        },
-        "CONVERSATION_SUMMARY": {
-            "type": "object",
-            "description": "Summary of the user's brewing journey and prior troubleshooting context",
-            "properties": {
-                "title": {
-                    "type": "string",
-                    "description": "Short title of the conversation history"
-                },
-                "summary": {
-                    "type": "string",
-                    "description": "Detailed summary of prior brewing attempts, patterns, and conclusions"
-                }
-            },
-            "required": ["title", "summary"]
-        }
-    },
-    "required": ["DIAGNOSIS", "REASONING", "RECOMMENDATIONS", "CONVERSATION_SUMMARY"]
-}
-
 // swap to good to go models, so 
 /**
  * gemini-3-flash-preview
  * gemini-2.5-flash
  * 
 */
-async function sendQuery(systemContent, userContent) {
+async function sendQuery(schema, systemContent, userContent) {
     let response = await ai.models.generateContent({
         model: "gemini-2.5-flash",
 
@@ -65,7 +27,7 @@ async function sendQuery(systemContent, userContent) {
 
         config: {
             responseMimeType: "application/json",
-            responseJsonSchema: responseSchema
+            responseJsonSchema: schema
         }
     });
 
