@@ -121,7 +121,7 @@ export default function TabLayout() {// Provide brew list to the app, also set u
           <Tabs.Screen name="addABrew" options={{ title: "Add a Brew", tabBarIcon: ({ color, size }) => (
             <Ionicons name="cafe" size={size} color={color} /> ) }} />
           <Tabs.Screen name="chat" options={{ title: "Barista Chat", tabBarIcon: ({ color, size }) => (
-            <Ionicons name="chatbubbles" size={size} color={color} /> ) }} />
+            <Ionicons name="sparkles" size={size} color={color} /> ) }} />
           <Tabs.Screen name="data" options={{ title: "My Data", tabBarIcon: ({ color, size }) => (
             <Ionicons name="bar-chart" size={size} color={color} /> ) }} />
         </Tabs>
