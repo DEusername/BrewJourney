@@ -1,14 +1,47 @@
 import { useState } from "react";
 import { router } from "expo-router";
 import { View, Text, TextInput, Button, StyleSheet } from "react-native";
+import backend_port from "../environment";
 
 export default function Index() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     setLoading(true);
+
+    const formData = { email:email, password:password };
+    console.log("FORM DATA:", formData);
+
+    const response = await fetch(`${backend_port}/userlogin`, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(formData)
+    })
+    var id = await response.json();
+    console.log("ID: ", id);
+
+    if (response.status == 200){
+      // It worked!
+      console.log("Login successful!");  
+      setTimeout(() => {
+      setLoading(false);
+      router.replace("/home");
+    }, 800);
+    } else {
+      console.log("Trouble logging in :(")
+      setTimeout(() => {
+      setLoading(false);
+      router.replace("/login");
+    }, 800);
+    }
+
+    // setTimeout(() => {
+    //   setLoading(false);
+    //   router.replace("/home");
+    // }, 800);
 
     setTimeout(() => {
       setLoading(false);

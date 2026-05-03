@@ -1,7 +1,6 @@
 import PageHeader from "../../components/PageHeader";
 import { Stack, useLocalSearchParams } from "expo-router";
-import { BackButton } from "../../components/BackButton";
-import {useEffect} from 'react'
+import { useEffect } from "react";
 import {
   Card,
   XStack,
@@ -106,10 +105,8 @@ export default function ID() {
   const brew = JSON.parse(params.brewLog); // If error, ignore
 
   useEffect(() => {
-
     console.log(brew);
-
-  }, [])
+  }, []);
 
   //TODO, rep with actual rating from server
   const rating = 1;
@@ -217,9 +214,7 @@ export default function ID() {
           <StyledCardLarge>
             <StyledCardHeader>
               <H2 fontSize={"$8"}>Notes:</H2>
-              <Paragraph>
-                {brew.notes}
-              </Paragraph>
+              <Paragraph>{brew.notes}</Paragraph>
             </StyledCardHeader>
           </StyledCardLarge>
         </CenterRow>
