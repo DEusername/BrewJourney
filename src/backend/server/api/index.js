@@ -8,12 +8,12 @@ const router = Router()
 
 // Testing route for the database setup
 router.get("/", async (req, res) => {
-  const userCount = await prisma.users.count(); 
-  res.json(
-    userCount == 0
-      ? "No users have been added yet."
-      : "Some users have been added to the database.", 
-  ); 
+  	const userCount = await prisma.Users.count(); 
+  	res.json(
+    	userCount == 0
+    	? "No users have been added yet."
+      	: "Some users have been added to the database.", 
+	); 
 }); 
 
 export default router
